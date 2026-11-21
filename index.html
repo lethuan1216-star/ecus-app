@@ -191,6 +191,7 @@ main{flex:1;display:flex;flex-direction:column;gap:10px;padding:12px 16px;min-he
 .c:hover{border-color:#93c5fd;box-shadow:0 3px 10px rgba(37,99,235,.08)}
 .c.dir-in{border-left-color:var(--in)}
 .c.dir-unk{border-left-color:#94a3b8}
+.c.verified{border-left:4.5px solid #059669;border-color:#86efac;box-shadow:0 2px 8px rgba(5,150,105,.1)}
 .c.old{opacity:.72;background:#fafafa}
 .c.bad{background:var(--err-bg);border-color:var(--err-bd);border-left-color:var(--err)}
 
@@ -211,7 +212,17 @@ main{flex:1;display:flex;flex-direction:column;gap:10px;padding:12px 16px;min-he
 .tg.yellow{background:#fef3c7;color:#92400e;border-color:#fde68a}
 .tg.red{background:#fee2e2;color:#991b1b;border-color:#fecaca}
 .tg.ov{background:#fef9c3;color:#854d0e;border-color:#fde047}
+.tg.ver{background:#059669;color:#fff;border-color:#047857;font-weight:700;display:inline-flex;align-items:center;gap:3px}
 .ch-act{margin-left:auto;display:flex;gap:5px;align-items:center}
+
+.u2-sug-pill{
+  display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;
+  color:#047857;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:5px;
+  padding:2px 6px;cursor:pointer;margin-top:2px;user-select:none;transition:.12s
+}
+.u2-sug-pill:hover{background:#d1fae5;border-color:#6ee7b7;color:#065f46}
+.u2-sug-pill b{font-family:var(--mono)}
+.it.verified{border-color:#86efac;box-shadow:0 0 0 1px #d1fae5}
 
 /* Partner Banner on Card */
 .pt-bar{
@@ -389,6 +400,7 @@ mark{background:#fde047;border-radius:2px;padding:0 1px;color:#0f172a;font-weigh
       <button class="soft" onclick="exportAllDB()" title="Xuất toàn bộ mặt hàng trong kho ra file Excel chuẩn để chỉnh sửa hoặc thêm mới hàng loạt">📊 Xuất toàn bộ kho dữ liệu ra Excel</button>
       <hr>
       <div class="mn-sec">Cấu hình thông minh</div>
+      <button class="g" onclick="verifiedList()">🛡️ Danh sách mã HS đã chốt chuẩn</button>
       <button class="g" onclick="ovList()">✎ Danh sách mã HS đã sửa</button>
       <button class="g" onclick="synEdit()">⇄ Từ đồng nghĩa (tìm thông minh)</button>
       <hr>
@@ -402,6 +414,27 @@ mark{background:#fde047;border-radius:2px;padding:0 1px;color:#0f172a;font-weigh
     </div>
   </details>
 </header>
+
+<datalist id="std-units">
+  <option value="KILO-GRAMMES">KILO-GRAMMES (Kg)</option>
+  <option value="PIECES">PIECES (Cái / Chiếc)</option>
+  <option value="SETS">SETS (Bộ)</option>
+  <option value="METRES">METRES (Mét)</option>
+  <option value="LITRES">LITRES (Lít)</option>
+  <option value="TONNE">TONNE (Tấn)</option>
+  <option value="ROLL">ROLL (Cuộn)</option>
+  <option value="TAM">TAM (Tấm)</option>
+  <option value="BOX">BOX (Hộp)</option>
+  <option value="CAN">CAN (Can / Bình)</option>
+  <option value="PACKS">PACKS (Gói)</option>
+  <option value="TO">TO (Tờ)</option>
+  <option value="SQUARE METRES">SQUARE METRES (m²)</option>
+  <option value="CUBIC METRES">CUBIC METRES (m³)</option>
+  <option value="PAIRS">PAIRS (Đôi / Cặp)</option>
+  <option value="BARRELS">BARRELS (Thùng)</option>
+  <option value="Kiện/Hộp/Bao/Gói">Kiện/Hộp/Bao/Gói</option>
+  <option value="Chai/ Lọ/ Tuýp">Chai/ Lọ/ Tuýp</option>
+</datalist>
 
 <main>
   <div class="dock">
@@ -460,10 +493,10 @@ mark{background:#fde047;border-radius:2px;padding:0 1px;color:#0f172a;font-weigh
         </div>
       </div>
       <div class="tb">
-        <button class="soft sm" onclick="addBlank()">＋ Dòng trống</button>
+        <button class="soft sm" onclick="addBlank()" title="Phím tắt: Ctrl + Enter">＋ Dòng trống (Ctrl+Enter)</button>
         <button class="g sm" onclick="copyAllRows()" title="Copy toàn bộ dòng hàng từ trên xuống dưới để dán vào Excel / Google Sheets">📋 Copy cả bảng (Excel)</button>
-        <button class="g sm" onclick="openFillDown(0)" title="Sao chép Mã HS, ĐVT, Xuất xứ, TS XK... từ dòng 1 xuống toàn bộ các dòng dưới">⤓ Chép từ dòng 1 xuống</button>
-        <button class="r-soft sm" style="margin-left:auto" onclick="clearRows()" title="Xóa toàn bộ dòng hàng trong lô hiện tại">✕ Xóa hết dòng</button>
+        <button class="g sm" onclick="openFillDown(0)" title="Sao chép Mã HS, ĐVT, Xuất xứ, TS XK... từ dòng 1 xuống toàn bộ các dòng dưới">⤓ Chép từ dòng 1</button>
+        <button class="r-soft sm" style="margin-left:auto" onclick="clearRows()" title="Xóa toàn bộ dòng hàng trong lô hiện tại">✕ Xóa hết</button>
       </div>
       <div id="pk" class="pb"></div>
       <div class="ft">
@@ -669,10 +702,137 @@ function addLine(o){
   }
 }
 
+/* Biểu thuế & Thống kê đơn vị tính (ĐVT & ĐVT 2) thông minh */
+let HS_UNIT_STATS = new Map();
+let HS_CHAPTER_STATS = new Map();
+
+function buildUnitStats(){
+  const hs8 = new Map();
+  const hs4 = new Map();
+  for(let i=0;i<items.length;i++){
+    const it=items[i];
+    if(!it.h)continue;
+    const h=String(it.h).replace(/\D/g,'');
+    if(!h)continue;
+    const w=it.n||1;
+
+    let s8=hs8.get(h);
+    if(!s8){s8={uMap:new Map(),u2Map:new Map()};hs8.set(h,s8)}
+    if(it.u)s8.uMap.set(it.u,(s8.uMap.get(it.u)||0)+w);
+    if(it.u2)s8.u2Map.set(it.u2,(s8.u2Map.get(it.u2)||0)+w);
+
+    const ch4=h.slice(0,4);
+    let s4=hs4.get(ch4);
+    if(!s4){s4={uMap:new Map(),u2Map:new Map()};hs4.set(ch4,s4)}
+    if(it.u)s4.uMap.set(it.u,(s4.uMap.get(it.u)||0)+w);
+    if(it.u2)s4.u2Map.set(it.u2,(s4.u2Map.get(it.u2)||0)+w);
+  }
+
+  const getTop=m=>{
+    let best='',max=0;
+    for(const[k,v]of m)if(v>max){max=v;best=k}
+    return best;
+  };
+
+  HS_UNIT_STATS=new Map();
+  for(const[h,s]of hs8)HS_UNIT_STATS.set(h,{u:getTop(s.uMap),u2:getTop(s.u2Map)});
+  HS_CHAPTER_STATS=new Map();
+  for(const[ch,s]of hs4)HS_CHAPTER_STATS.set(ch,{u:getTop(s.uMap),u2:getTop(s.u2Map)});
+}
+
+function getUnitSuggestion(rawHs){
+  if(!rawHs)return null;
+  const h=String(rawHs).replace(/\D/g,'');
+  if(h.length>=7){
+    const padded=h.length===7?'0'+h:h;
+    const s8=HS_UNIT_STATS.get(padded);
+    if(s8&&(s8.u||s8.u2))return s8;
+  }
+  if(h.length>=4){
+    const s4=HS_CHAPTER_STATS.get(h.slice(0,4));
+    if(s4&&(s4.u||s4.u2))return s4;
+  }
+  return null;
+}
+
+/* Quản lý Mã HS Chuẩn Đã Chốt (Tích xanh) */
+function isHsVerified(txt,hs){
+  if(!ST.verified||!txt||!hs)return false;
+  const ck=cleanKeyName(txt);
+  return Boolean(ck&&ST.verified[ck]===String(hs).replace(/\D/g,''));
+}
+
+function toggleVerifyHs(txt,hs){
+  const ck=cleanKeyName(txt);
+  if(!ck)return false;
+  ST.verified??={};
+  const cleanHs=String(hs).replace(/\D/g,'');
+  if(ST.verified[ck]===cleanHs){
+    delete ST.verified[ck];
+    saveDeb();
+    return false;
+  }else{
+    ST.verified[ck]=cleanHs;
+    saveDeb();
+    return true;
+  }
+}
+
+function verifiedList(){
+  $('menu').open=false;
+  ST.verified??={};
+  const entries=Object.entries(ST.verified);
+  modal(`🛡️ Danh sách mã HS đã chốt chuẩn (${entries.length})`,
+    entries.length
+      ? '<table class="rv"><tr><th>Tên hàng (chuẩn hóa)</th><th>Mã HS chuẩn</th><th></th></tr>'+
+        entries.map(([t,h])=>`<tr><td>${esc(t)}</td><td style="font-family:var(--mono);font-weight:700;color:#059669">${esc(h)}</td><td><button class="g xs" data-unver="${esc(t)}">Bỏ chốt</button></td></tr>`).join('')+
+        '</table>'
+      : '<p class="m">Chưa có mã HS nào được chốt chuẩn.<br>Bấm nút <b>"✓ Chốt chuẩn"</b> trên thẻ kết quả hoặc dòng hàng để đánh dấu.</p>',
+    '',()=>{}
+  );
+  $('mb').onclick=e=>{
+    const un=e.target.dataset.unver;
+    if(un!==undefined){
+      delete ST.verified[un];
+      save();search();drawL();verifiedList();
+      toast('Đã bỏ chốt mã');
+    }
+  };
+}
+
+/* Lưu vĩnh viễn mặt hàng từ dòng tờ khai vào kho app */
+function saveRowToDB(r){
+  if(!r||!r.t||!r.h)return toast('⚠️ Cần có ít nhất Tên hàng và Mã HS để lưu vào kho!');
+  const cleanHs=String(r.h).replace(/\D/g,'');
+  if(cleanHs.length<4)return toast('⚠️ Mã HS không hợp lệ (cần ít nhất 4-8 số)!');
+  const o={
+    t:r.t.trim(),
+    h:cleanHs,
+    m:(r.m||'').trim(),
+    u:r.u||'',
+    u2:r.u2||'',
+    o:r.o||'',
+    g:Number(r.g)||0,
+    x:Number(r.x)||0,
+    d:new Date().toISOString().slice(0,10),
+    p:r.p||'',
+    k:r.lh||(r.dir==='out'?'B11':r.dir==='in'?'A11':''),
+    n:1
+  };
+  addLine(o);
+  prep();
+  ver=Date.now();
+  kvSet('d',{ver,items:ser(items)});
+  saveDeb();
+  search();
+  toast(`✓ Đã lưu vĩnh viễn: "${o.t.slice(0,40)}..." (HS ${o.h}) vào kho tra cứu!`);
+}
+
 function prep(){
   VC=null;
   items=[...M.values()];
   applyOv();
+  buildUnitStats();
   const bn=new Map();
   const ptCounts=new Map();
   for(let i=0;i<items.length;i++){
@@ -714,13 +874,14 @@ function prep(){
 async function load(){
   const s=await kvGet('d'),st=await kvGet('st');
   if(st)ST=st;
-  ST.bad??={};ST.pm??={};ST.ov??={};ST.L??={'Lô 1':[]};
+  ST.bad??={};ST.pm??={};ST.ov??={};ST.L??={'Lô 1':[]};ST.verified??={};
   if(!ST.cur||!ST.L[ST.cur])ST.cur=Object.keys(ST.L)[0]||'Lô 1';
   const vl=await kvGet('vl');
   VL=new Set(vl||(s||st?[]:EMB.vl)||[]);
   if(!st&&EMB.bad)ST.bad=EMB.bad;
   if(!st&&EMB.syn)ST.syn=EMB.syn;
   if(!st&&EMB.ov)ST.ov=EMB.ov;
+  if(!st&&EMB.verified)ST.verified=EMB.verified;
   if(VL.size&&VL.size<500){VL=new Set();kvSet('vl',[])}
   $('cut').value=ST.cut||'';
   updVL();
@@ -870,7 +1031,8 @@ function score(it,V,Q){
   const s=it._ix;
   for(const w of Q.ex)if(s.includes(w))return 0;
   for(const p of Q.ph)if(!s.includes(p))return 0;
-  if(!V[0]||!V[0][0])return 1;
+  const isVer=isHsVerified(it.t,it.h);
+  if(!V[0]||!V[0][0])return isVer?100:1;
   let best=0;
   for(const tk of V){
     let sum=0;
@@ -885,7 +1047,7 @@ function score(it,V,Q){
     if(tk.some(w=>/^\d{3,}$/.test(w)&&it.h.startsWith(w)))c+=1.5;
     best=Math.max(best,c);
   }
-  return best?best+(Q.ph.length?1:0):0;
+  return best?(best+(Q.ph.length?1:0)+(isVer?50:0)):0;
 }
 
 /* Fast highlight without NFD calls */
@@ -1053,8 +1215,10 @@ function search(){
 function card(i,r){
   const it=items[i],z=stat(it),bd=ST.bad[it.h],al=it._al,H=hl(it.h,HT);
   const di=getDirInfo(it.k);
+  const isVer=isHsVerified(it.t,it.h);
   const flBadge=it._fl==='xanh'?'<span class="tg green">🟢 Xanh</span>':it._fl==='vang'?'<span class="tg yellow">🟡 Vàng</span>':it._fl==='do'?'<span class="tg red">🔴 Đỏ</span>':'';
   const dirIcon=di.dir==='out'?'📤':di.dir==='in'?'📥':'🏢';
+  const verBadge=isVer?'<span class="tg ver" title="Mã HS này đã được bạn chốt là chuẩn nhất">🛡️ MÃ CHUẨN</span>':'';
   const partnerHtml=it.p
     ? `<div class="pt-bar ${di.dir}">
          <span class="pt-role">${dirIcon} ${di.role}:</span>
@@ -1063,9 +1227,10 @@ function card(i,r){
        </div>`
     : (di.code?`<div class="pt-bar ${di.dir}"><span class="pt-role">${dirIcon} ${esc(di.desc)}</span><span style="opacity:.75">(Chưa có tên đối tác)</span><span class="lh-tag">${esc(di.code)}</span></div>`:'');
 
-  return `<div class="c ${z} dir-${di.dir}">
+  return `<div class="c ${z} dir-${di.dir}${isVer?' verified':''}">
     <div class="ch">
       <span class="hs-btn" data-cp-hs="${esc(it.h)}" title="Bấm để copy mã HS">${z=='bad'?'<s>'+H+'</s>':H}</span>
+      ${verBadge}
       ${it.u?`<span class="tg">${esc(it.u)}</span>`:''}
       ${it.o?`<span class="tg">${esc(it.o)}</span>`:''}
       ${it.x!==undefined&&it.x!==''?`<span class="tg">XNK ${it.x}%</span>`:''}
@@ -1073,6 +1238,7 @@ function card(i,r){
       ${flBadge}
       ${it.oh!==undefined?`<span class="tg ov">✎ gốc ${esc(it.oh)}</span>`:''}
       <div class="ch-act">
+        <button class="${isVer?'ok':'g'} xs" data-ver-card="${r}" title="${isVer?'Bỏ chốt mã chuẩn cho mặt hàng này':'Tích xanh chốt mã HS này là chuẩn nhất'}">${isVer?'✓ Đã chốt':'✓ Chốt chuẩn'}</button>
         <button class="g xs" data-cp-nm="${r}" title="Copy tên hàng vào Clipboard">📋 Copy</button>
         <button class="xs" data-a="${r}" title="Thêm vào danh sách xuất ECUS bên phải">＋ Thêm</button>
       </div>
@@ -1137,8 +1303,19 @@ $('fc').onclick=e=>{
   if(p!==undefined){FP=FP===p?'':p;return search()}
 };
 
-/* Keyboard shortcut '/' to focus search */
+/* Keyboard shortcuts */
 document.addEventListener('keydown',e=>{
+  if((e.ctrlKey || e.metaKey) && e.key==='Enter'){
+    e.preventDefault();
+    addBlank();
+    return;
+  }
+  if((e.ctrlKey || e.metaKey) && (e.key==='s' || e.key==='S')){
+    e.preventDefault();
+    save();
+    toast('✓ Đã lưu trạng thái lô hàng!');
+    return;
+  }
   if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){
     e.preventDefault();$('q').focus();$('q').select();
   }else if(e.key==='Escape'&&$('pm').style.display==='flex'){
@@ -1160,6 +1337,16 @@ function addIt(it,q=1,g){
 }
 
 $('res').onclick=e=>{
+  const verCard=e.target.dataset.verCard;
+  if(verCard!==undefined){
+    e.preventDefault();
+    const it=items[R[verCard]];
+    const isNow=toggleVerifyHs(it.t, it.h);
+    search();
+    drawL();
+    toast(isNow ? `✓ Đã chốt mã HS ${it.h} là chuẩn nhất!` : 'Đã bỏ chốt mã chuẩn');
+    return;
+  }
   const p=e.target.dataset.p;
   if(p!==undefined){FP=FP===p?'':p;return search()}
   const cpHs=e.target.dataset.cpHs;
@@ -1221,7 +1408,7 @@ function delCo(){
 }
 
 const fld=(l,h)=>`<label class="fld">${l}${h}</label>`;
-const ip=(f,v,t,ph)=>`<input data-f="${f}" ${t?'type="number" step="any" ':''}${ph!==undefined?'placeholder="'+esc(ph)+'" ':''}value="${esc(v)}">`;
+const ip=(f,v,t,ph,extra)=>`<input data-f="${f}" ${t?'type="number" step="any" ':''}${ph!==undefined?'placeholder="'+esc(ph)+'" ':''}${extra||''} value="${esc(v)}">`;
 
 function drawL(flashIdx=-1){
   const L=CL();
@@ -1244,15 +1431,30 @@ function drawL(flashIdx=-1){
     const [tv,tt]=calc(r);
     const di=getDirInfo(r.lh);
     const dirIcon=di.dir==='out'?'📤':di.dir==='in'?'📥':'🏢';
+    const isVer=isHsVerified(r.t,r.h);
+    const sug=getUnitSuggestion(r.h);
     const ptBadge=r.p
       ? `<span class="it-pt ${di.dir}" title="${esc(di.role+': '+r.p+(r.lh?' ('+r.lh+')':''))}">${dirIcon} ${di.role}: ${esc(shortPartner(r.p))}</span>`
       : `<span class="it-pt unk">✎ Tự nhập</span>`;
-    return `<div class="it${i===flashIdx?' flash':''}" data-r="${i}">
+
+    let sugHtml='';
+    if(sug && (sug.u2 || sug.u)){
+      const showU2 = sug.u2 && (!r.u2 || r.u2 !== sug.u2);
+      const showU = sug.u && !r.u;
+      if(showU2 || showU){
+        sugHtml=`<span class="u2-sug-pill" data-apply-sug="${i}" data-u="${esc(sug.u||'')}" data-u2="${esc(sug.u2||'')}" title="Bấm để tự động điền ĐVT: ${esc(sug.u||'')} & ĐVT 2: ${esc(sug.u2||'')}">💡 Gợi ý ĐVT 2: <b>${esc(sug.u2||'—')}</b> [Áp dụng]</span>`;
+      }
+    }
+
+    return `<div class="it${i===flashIdx?' flash':''}${isVer?' verified':''}" data-r="${i}">
       <div class="it-hd">
         <span class="it-num">#${i+1}</span>
         ${ptBadge}
+        ${isVer?'<span class="tg ver">🛡️ Đã chốt mã</span>':''}
         <div class="it-acts">
-          <button class="soft xs" data-dup="${i}" title="Nhân bản dòng #${i+1} thành 1 dòng mới ngay bên dưới">⧉ Nhân bản ↓</button>
+          <button class="${isVer?'ok':'g'} xs" data-ver-row="${i}" title="${isVer?'Bỏ chốt mã chuẩn cho mặt hàng này':'Tích xanh CHỐT mã HS này là chuẩn nhất 100%'}">${isVer?'✓ Đã chốt':'✓ Chốt mã'}</button>
+          <button class="soft xs" data-save-db="${i}" title="Lưu vĩnh viễn mặt hàng và mã HS này vào kho tra cứu của app">💾 Lưu kho</button>
+          <button class="soft xs" data-dup="${i}" title="Nhân bản dòng #${i+1}">⧉ Nhân bản</button>
           <button class="g xs" data-fd="${i}" title="Sao chép thuộc tính từ dòng #${i+1} xuống TẤT CẢ các dòng bên dưới">⤓ Chép xuống</button>
           <button class="g ic" data-up="${i}" ${i===0?'disabled':''} title="Đẩy dòng lên trên">▲</button>
           <button class="g ic" data-dn="${i}" ${i===L.length-1?'disabled':''} title="Đẩy dòng xuống dưới">▼</button>
@@ -1261,9 +1463,9 @@ function drawL(flashIdx=-1){
       </div>
       <div class="r1"><textarea data-f="t" rows="2" placeholder="Nhập mô tả chi tiết tên hàng...">${esc(r.t)}</textarea></div>
       <div class="gr">
-        ${fld('Mã HS',ip('h',r.h))}
+        ${fld('Mã HS'+(sugHtml?' '+sugHtml:''),ip('h',r.h))}
         ${fld('Lượng',ip('q',r.q,1))}
-        ${fld('ĐVT',ip('u',r.u))}
+        ${fld('ĐVT',ip('u',r.u,0,'','list="std-units"'))}
         ${fld('Đơn giá',ip('g',r.g,1))}
         ${fld('Trị giá','<output class="tv">'+fm(tv)+'</output>')}
       </div>
@@ -1271,7 +1473,7 @@ function drawL(flashIdx=-1){
         ${fld('Mã hàng',ip('m',r.m))}
         ${fld('Xuất xứ',ip('o',r.o))}
         ${fld('Lượng 2',ip('q2',r.q2??'',1,r.q))}
-        ${fld('ĐVT 2',ip('u2',r.u2??'',0,r.u?'= '+r.u:''))}
+        ${fld('ĐVT 2',ip('u2',r.u2??'',0,r.u?'= '+r.u:'','list="std-units"'))}
         ${fld('TS XK (%)',ip('x',r.x,1))}
         ${fld('Tiền thuế','<output class="tt">'+fm(tt)+'</output>')}
       </div>
@@ -1312,8 +1514,30 @@ $('pk').oninput=e=>{
 
 /* Row action buttons: Duplicate, Fill Down, Move Up/Down, Delete */
 $('pk').onclick=e=>{
-  const btn=e.target.closest('button');if(!btn)return;
+  const sugPill = e.target.closest('.u2-sug-pill');
   const L=CL();
+  if(sugPill){
+    const i=+sugPill.dataset.applySug;
+    if(sugPill.dataset.u2) L[i].u2 = sugPill.dataset.u2;
+    if(sugPill.dataset.u && !L[i].u) L[i].u = sugPill.dataset.u;
+    saveDeb();
+    drawL(i);
+    toast(`✓ Đã áp dụng gợi ý ĐVT 2: ${sugPill.dataset.u2}`);
+    return;
+  }
+  const btn=e.target.closest('button');if(!btn)return;
+  if(btn.dataset.saveDb!==undefined){
+    const i=+btn.dataset.saveDb;
+    return saveRowToDB(L[i]);
+  }
+  if(btn.dataset.verRow!==undefined){
+    const i=+btn.dataset.verRow;
+    const isNow=toggleVerifyHs(L[i].t, L[i].h);
+    drawL(i);
+    search();
+    toast(isNow ? `✓ Đã chốt mã HS ${L[i].h} là chuẩn nhất!` : 'Đã bỏ chốt mã chuẩn');
+    return;
+  }
   if(btn.dataset.x!==undefined){
     L.splice(+btn.dataset.x,1);save();drawL();return;
   }
@@ -1665,6 +1889,20 @@ function matchOneLine(rawLine,useCode){
   const ptShort=top.it.p?shortPartner(top.it.p):'';
   const dirLbl=top.it.k?getDirInfo(top.it.k).role:'';
 
+  // Ưu tiên mã HS đã được chốt chuẩn 100%
+  const ck = cleanKeyName(line);
+  const verHs = (ST.verified && ST.verified[ck]) ? ST.verified[ck] : '';
+  if (verHs) {
+    const verGrp = groups.find(g => g.h === verHs);
+    const repIt = verGrp ? verGrp.it : top.it;
+    return {
+      raw: rawLine, code: matchedCode || codes[0] || '', status: 'ok', hs: verHs,
+      u: repIt.u || '', o: repIt.o || '', x: repIt.x ?? '', p: repIt.p || '', lh: repIt.k || '',
+      alts: groups,
+      note: `🛡️ Khớp mã HS chuẩn đã chốt (${verHs})`
+    };
+  }
+
   if(z==='bad'){
     return{
       raw:rawLine,code:matchedCode||codes[0]||'',status:'bad',hs:hsVal,
@@ -1873,7 +2111,7 @@ window.importCloudPayload = async function(data) {
   if (!data) return false;
   if (data.st) {
     ST = data.st;
-    ST.bad ??= {}; ST.pm ??= {}; ST.ov ??= {}; ST.L ??= { 'Lô 1': [] };
+    ST.bad ??= {}; ST.pm ??= {}; ST.ov ??= {}; ST.L ??= { 'Lô 1': [] }; ST.verified ??= {};
     if (!ST.cur || !ST.L[ST.cur]) ST.cur = Object.keys(ST.L)[0] || 'Lô 1';
     if ($('cut')) $('cut').value = ST.cut || '';
     await kvSet('st', ST);

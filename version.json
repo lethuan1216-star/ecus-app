@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "date": "2026-11-21",
-  "changelog": "Nâng cấp đồng bộ Cloud siêu tốc (Khắc phục triệt để lỗi giới hạn Firestore 1MB)"
+  "changelog": "Gợi ý ĐVT 2 thông minh theo mã HS & biểu thuế, Nút lưu vào kho tra cứu vĩnh viễn, Tích xanh chốt mã HS chuẩn 100% và Thiết kế giao diện mới gọn đẹp tiện lợi"
 }
