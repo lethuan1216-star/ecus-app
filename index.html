@@ -1857,6 +1857,40 @@ async function checkUpdateManual(silent = false) {
 initVersionBadge();
 setTimeout(() => checkUpdateManual(true), 3500);
 
+/* Cloud Sync Payload Helpers (Lightweight ~20KB, 100% immune to Firestore 1MB limit) */
+window.exportCloudPayload = function() {
+  const embKeySet = new Set((EMB.items || []).map(key));
+  const customItems = items.filter(it => !embKeySet.has(key(it)));
+  return {
+    st: ST,
+    customItems: ser(customItems).slice(0, 3000),
+    ls: { ...localStorage },
+    v: 2
+  };
+};
+
+window.importCloudPayload = async function(data) {
+  if (!data) return false;
+  if (data.st) {
+    ST = data.st;
+    ST.bad ??= {}; ST.pm ??= {}; ST.ov ??= {}; ST.L ??= { 'Lô 1': [] };
+    if (!ST.cur || !ST.L[ST.cur]) ST.cur = Object.keys(ST.L)[0] || 'Lô 1';
+    if ($('cut')) $('cut').value = ST.cut || '';
+    await kvSet('st', ST);
+  }
+  if (Array.isArray(data.customItems) && data.customItems.length) {
+    for (const it of data.customItems) addLine(it);
+    await kvSet('d', { ver: Date.now(), items: ser(items) });
+  }
+  if (data.ls) {
+    for (const k in data.ls) {
+      if (!k.startsWith('firebase')) localStorage.setItem(k, data.ls[k]);
+    }
+  }
+  prep(); drawCo(); drawL(); search();
+  return true;
+};
+
 load();
 </script>
 <!-- === FIREBASE LOGIN & SYNC === -->
@@ -1955,104 +1989,48 @@ load();
     signOut(auth);
   };
 
-  async function exportAllStorage() {
-    const result = { ls: {}, idb: {} };
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i);
-      result.ls[k] = localStorage.getItem(k);
-    }
-    if (window.indexedDB && indexedDB.databases) {
-      const dbs = await indexedDB.databases();
-      for (const dbInfo of dbs) {
-        if (!dbInfo.name || dbInfo.name.startsWith("firebase")) continue;
-        result.idb[dbInfo.name] = await new Promise((resolve) => {
-          const req = indexedDB.open(dbInfo.name);
-          req.onsuccess = () => {
-            const idb = req.result;
-            const stores = Array.from(idb.objectStoreNames);
-            if (!stores.length) { idb.close(); return resolve({}); }
-            const tx = idb.transaction(stores, "readonly");
-            const dump = {};
-            let pending = stores.length;
-            stores.forEach((s) => {
-              const store = tx.objectStore(s);
-              const keysReq = store.getAllKeys();
-              const valsReq = store.getAll();
-              valsReq.onsuccess = () => {
-                dump[s] = { keys: keysReq.result, values: valsReq.result };
-                if (--pending === 0) { idb.close(); resolve(dump); }
-              };
-            });
-            tx.onerror = () => { idb.close(); resolve({}); };
-          };
-          req.onerror = () => resolve({});
-        });
-      }
-    }
-    return JSON.stringify(result);
-  }
-
-  async function importAllStorage(jsonStr) {
-    const data = JSON.parse(jsonStr);
-    if (data.ls) {
-      Object.keys(data.ls).forEach((k) => localStorage.setItem(k, data.ls[k]));
-    }
-    if (data.idb && window.indexedDB) {
-      for (const dbName of Object.keys(data.idb)) {
-        const storesData = data.idb[dbName];
-        await new Promise((resolve) => {
-          const req = indexedDB.open(dbName);
-          req.onsuccess = () => {
-            const idb = req.result;
-            const validStores = Object.keys(storesData).filter((s) => idb.objectStoreNames.contains(s));
-            if (!validStores.length) { idb.close(); return resolve(); }
-            const tx = idb.transaction(validStores, "readwrite");
-            validStores.forEach((s) => {
-              const store = tx.objectStore(s);
-              store.clear();
-              const { keys, values } = storesData[s];
-              values.forEach((val, idx) => {
-                if (store.keyPath) store.put(val);
-                else store.put(val, keys[idx]);
-              });
-            });
-            tx.oncomplete = () => { idb.close(); resolve(); };
-            tx.onerror = () => { idb.close(); resolve(); };
-          };
-          req.onerror = () => resolve();
-        });
-      }
-    }
-  }
-
   async function pushToCloud() {
     if (!currentUser) return;
+    const btn = document.getElementById("fb-push");
+    const oldText = btn ? btn.innerHTML : "";
+    if (btn) { btn.innerHTML = "⏳ Đang lưu..."; btn.disabled = true; }
     try {
-      const payload = await exportAllStorage();
+      const payloadObj = window.exportCloudPayload ? window.exportCloudPayload() : { st: {} };
+      const payloadStr = JSON.stringify(payloadObj);
       const now = new Date().toISOString();
       await setDoc(doc(db, "users", currentUser.uid), {
-        appData: payload,
-        updatedAt: now
+        appData: payloadStr,
+        updatedAt: now,
+        v: 2
       });
       sessionStorage.setItem("fb_last_sync", now);
-      if (window.toast) toast("☁️ Đã đồng bộ dữ liệu lên Cloud!");
-      else alert("Đã đồng bộ lên Cloud!");
+      if (window.toast) toast("☁️ Đã đồng bộ dữ liệu lên Cloud thành công!");
+      else alert("Đã đồng bộ lên Cloud thành công!");
     } catch (e) {
       alert("Lỗi đồng bộ: " + e.message);
+    } finally {
+      if (btn) { btn.innerHTML = oldText; btn.disabled = false; }
     }
   }
 
   async function pullFromCloud(force = false) {
     if (!currentUser) return;
+    const btn = document.getElementById("fb-pull");
+    const oldText = btn ? btn.innerHTML : "";
+    if (force && btn) { btn.innerHTML = "⏳ Đang tải..."; btn.disabled = true; }
     try {
       const snap = await getDoc(doc(db, "users", currentUser.uid));
       if (snap.exists() && snap.data().appData) {
         const remoteTime = snap.data().updatedAt || "";
         const lastSynced = sessionStorage.getItem("fb_last_sync") || "";
         if (force || (remoteTime && remoteTime !== lastSynced)) {
-          await importAllStorage(snap.data().appData);
+          let data;
+          try { data = JSON.parse(snap.data().appData); } catch (_) {}
+          if (data && window.importCloudPayload) {
+            await window.importCloudPayload(data);
+          }
           sessionStorage.setItem("fb_last_sync", remoteTime);
-          location.reload();
+          if (window.toast) toast("✓ Đã nạp dữ liệu mới nhất từ Cloud!");
         } else if (force && window.toast) {
           toast("✓ Dữ liệu trên máy đã là mới nhất!");
         }
@@ -2061,6 +2039,9 @@ load();
       }
     } catch (e) {
       console.error(e);
+      if (force) alert("Lỗi tải từ Cloud: " + e.message);
+    } finally {
+      if (force && btn) { btn.innerHTML = oldText; btn.disabled = false; }
     }
   }
 

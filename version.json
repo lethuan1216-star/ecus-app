@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "date": "2026-11-21",
-  "changelog": "Bản phát hành đầu tiên có tính năng tự động cập nhật từ xa"
+  "changelog": "Nâng cấp đồng bộ Cloud siêu tốc (Khắc phục triệt để lỗi giới hạn Firestore 1MB)"
 }
