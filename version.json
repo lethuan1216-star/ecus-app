@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
-  "date": "2026-11-21",
-  "changelog": "Gợi ý ĐVT 2 thông minh theo mã HS & biểu thuế, Nút lưu vào kho tra cứu vĩnh viễn, Tích xanh chốt mã HS chuẩn 100% và Thiết kế giao diện mới gọn đẹp tiện lợi"
+  "version": "1.0.3",
+  "date": "2026-11-25",
+  "changelog": "Nạp bảng kê hóa đơn/Invoice theo khung mẫu chuẩn 8 cột, Bộ từ điển 158 đơn vị tính Hải quan chuẩn hóa tự động (DVT.xls), Chiêu 2 tự động đồng bộ Lượng 2 = Lượng 1 khi trùng ĐVT hoặc để trống, Tải file mẫu Excel (.xlsx), và Tự động bảo vệ Lượng 2 khi xuất Excel ECUS"
 }

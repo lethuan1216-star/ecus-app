@@ -376,7 +376,20 @@ mark{background:#fde047;border-radius:2px;padding:0 1px;color:#0f172a;font-weigh
 .bl-note.warn{color:#b45309;font-weight:600}
 .bl-note.bad{color:var(--err);font-weight:600}
 .bl-note.ok{color:var(--ok)}
-.bl-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}</style>
+.bl-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+/* Khung Mau Bang Ke Modal */
+.tpl-guide{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:9px 12px;margin-bottom:10px}
+.tpl-guide-title{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:13px;color:#166534}
+.tpl-cols-bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tpl-col-badge{font-size:11.5px;padding:2px 8px;background:#fff;border:1px solid #86efac;border-radius:4px;color:#15803d;font-weight:600;font-family:var(--mono)}
+.tpl-col-badge.req{background:#dcfce7;border-color:#22c55e;color:#14532d;font-weight:700}
+.tpl-top{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.tpl-top textarea{min-height:120px;max-height:220px;font-family:var(--mono);font-size:12px;line-height:1.45;resize:vertical}
+.tpl-ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px;background:var(--surf2);border:1px solid var(--bd);border-radius:8px}
+.tpl-opts{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-left:auto}
+.badge-sync{display:inline-block;padding:1px 6px;background:#dcfce7;color:#15803d;border:1px solid #86efac;border-radius:4px;font-size:10.5px;font-weight:700;margin-left:4px}
+.badge-ver{display:inline-block;padding:1px 6px;background:#d1fae5;color:#047857;border:1px solid #6ee7b7;border-radius:4px;font-size:11px;font-weight:700}
+</style>
 </head>
 <body>
 
@@ -416,24 +429,190 @@ mark{background:#fde047;border-radius:2px;padding:0 1px;color:#0f172a;font-weigh
 </header>
 
 <datalist id="std-units">
-  <option value="KILO-GRAMMES">KILO-GRAMMES (Kg)</option>
-  <option value="PIECES">PIECES (Cái / Chiếc)</option>
-  <option value="SETS">SETS (Bộ)</option>
-  <option value="METRES">METRES (Mét)</option>
-  <option value="LITRES">LITRES (Lít)</option>
-  <option value="TONNE">TONNE (Tấn)</option>
-  <option value="ROLL">ROLL (Cuộn)</option>
-  <option value="TAM">TAM (Tấm)</option>
-  <option value="BOX">BOX (Hộp)</option>
-  <option value="CAN">CAN (Can / Bình)</option>
-  <option value="PACKS">PACKS (Gói)</option>
-  <option value="TO">TO (Tờ)</option>
-  <option value="SQUARE METRES">SQUARE METRES (m²)</option>
-  <option value="CUBIC METRES">CUBIC METRES (m³)</option>
-  <option value="PAIRS">PAIRS (Đôi / Cặp)</option>
-  <option value="BARRELS">BARRELS (Thùng)</option>
-  <option value="Kiện/Hộp/Bao/Gói">Kiện/Hộp/Bao/Gói</option>
-  <option value="Chai/ Lọ/ Tuýp">Chai/ Lọ/ Tuýp</option>
+  <option value="PCE">PCE - Cái/Chiếc (PIECES)</option>
+  <option value="PIECES">PIECES (PCE - Cái/Chiếc)</option>
+  <option value="KGM">KGM - Kilogam (KILO-GRAMMES)</option>
+  <option value="KILO-GRAMMES">KILO-GRAMMES (KGM - Kilogam)</option>
+  <option value="SET">SET - Bộ (SETS)</option>
+  <option value="SETS">SETS (SET - Bộ)</option>
+  <option value="TAM">TAM - Tấm (TAM)</option>
+  <option value="ROL">ROL - Cuộn (ROLL)</option>
+  <option value="ROLL">ROLL (ROL - Cuộn)</option>
+  <option value="MTR">MTR - Mét (METRES)</option>
+  <option value="METRES">METRES (MTR - Mét)</option>
+  <option value="TNE">TNE - Tấn (TONNE)</option>
+  <option value="TONNE">TONNE (TNE - Tấn)</option>
+  <option value="LTR">LTR - Lít (LITRES)</option>
+  <option value="LITRES">LITRES (LTR - Lít)</option>
+  <option value="MTK">MTK - Mét vuông (SQUARE METRES)</option>
+  <option value="SQUARE METRES">SQUARE METRES (MTK - Mét vuông)</option>
+  <option value="MTQ">MTQ - Mét khối (CUBIC METRES)</option>
+  <option value="CUBIC METRES">CUBIC METRES (MTQ - Mét khối)</option>
+  <option value="UNK">UNK - Kiện/Hộp/Bao/Gói (BOX)</option>
+  <option value="BOX">BOX (UNK - Kiện/Hộp/Bao/Gói)</option>
+  <option value="PAIL">PAIL - Thùng (BARRELS)</option>
+  <option value="BARRELS">BARRELS (PAIL - Thùng)</option>
+  <option value="PAL">PAL - Pallet (PALLET)</option>
+  <option value="PALLET">PALLET (PAL - Pallet)</option>
+  <option value="BAG">BAG - Túi (BAG)</option>
+  <option value="BICH">BICH - Bịch (BICH)</option>
+  <option value="VI">VI - Vỉ (VI)</option>
+  <option value="PIP">PIP - Ống (PIPE)</option>
+  <option value="PIPE">PIPE (PIP - Ống)</option>
+  <option value="TO">TO - Tờ (TO)</option>
+  <option value="PR">PR - Đôi/Cặp (PAIR)</option>
+  <option value="PAIR">PAIR (PR - Đôi/Cặp)</option>
+  <option value="DZN">DZN - Tá (DOZEN)</option>
+  <option value="DOZEN">DOZEN (DZN - Tá)</option>
+  <option value="UNA">UNA - Chai/ Lọ/ Tuýp (BOTTLE)</option>
+  <option value="BOTTLE">BOTTLE (UNA - Chai/ Lọ/ Tuýp)</option>
+  <option value="UNL">UNL - Lon/Can (CAN)</option>
+  <option value="CAN">CAN (UNL - Lon/Can)</option>
+  <option value="UNT">UNT - Thanh/Mảnh/Miếng (PIECE)</option>
+  <option value="PIECE">PIECE (UNT - Thanh/Mảnh/Miếng)</option>
+  <option value="UNY">UNY - Cây (CAY)</option>
+  <option value="CAY">CAY (UNY - Cây)</option>
+  <option value="UNC">UNC - Con (CON)</option>
+  <option value="CON">CON (UNC - Con)</option>
+  <option value="UNB">UNB - Quyển/Tập (BOOK)</option>
+  <option value="BOOK">BOOK (UNB - Quyển/Tập)</option>
+  <option value="UNV">UNV - Viên/Hạt (PILL)</option>
+  <option value="PILL">PILL (UNV - Viên/Hạt)</option>
+  <option value="GRM">GRM - Gam (GRAMME)</option>
+  <option value="GRAMME">GRAMME (GRM - Gam)</option>
+  <option value="SYS">SYS - Hệ thống (SYSTEM)</option>
+  <option value="SYSTEM">SYSTEM (SYS - Hệ thống)</option>
+  <option value="PRO">PRO - Sản phẩm (PRODUCT)</option>
+  <option value="PRODUCT">PRODUCT (PRO - Sản phẩm)</option>
+  <option value="LOT">LOT - Lô (nhiều cái) (LOT)</option>
+  <option value="UNIT">UNIT - UNIT (UNIT)</option>
+  <option value="LBS">LBS - LBS</option>
+  <option value="ADMT">ADMT - Air Dry Met Ton</option>
+  <option value="AUD">AUD - Dollar Australia</option>
+  <option value="BAN">BAN - Bản</option>
+  <option value="BANG">BANG - Bảng</option>
+  <option value="BBL">BBL - Barrel</option>
+  <option value="BRL">BRL - Real Brasil</option>
+  <option value="CAD">CAD - Dollar Canada</option>
+  <option value="CEN">CEN - Cen ti mét</option>
+  <option value="CHF">CHF - Franc Thụy Sĩ</option>
+  <option value="CHI">CHI - CHI</option>
+  <option value="CM2">CM2 - cm2</option>
+  <option value="CM3">CM3 - cm3</option>
+  <option value="CNY">CNY - Nhân dân tệ</option>
+  <option value="CONT">CONT - CONTAINER</option>
+  <option value="CT">CT - Cara</option>
+  <option value="CUC">CUC - Cục</option>
+  <option value="CUM">CUM - Cụm</option>
+  <option value="DKK">DKK - Krone Đan Mạch</option>
+  <option value="DM">DM - dm</option>
+  <option value="DM2">DM2 - dm2</option>
+  <option value="DMTR">DMTR - 10 mét</option>
+  <option value="DPCE">DPCE - 10 chiếc</option>
+  <option value="DPT">DPT - Trọng tải</option>
+  <option value="DUNK">DUNK - 10 BAO</option>
+  <option value="EUR">EUR - EUR</option>
+  <option value="FOT">FOT - Phút</option>
+  <option value="FTK">FTK - Phút vuông</option>
+  <option value="FTQ">FTQ - Phút khối</option>
+  <option value="GBP">GBP - Bảng Anh</option>
+  <option value="GDW">GDW - Gam (trọng lg khô)</option>
+  <option value="GIC">GIC - Gam (gồm container)</option>
+  <option value="GII">GII - Gam (gồm bao bì)</option>
+  <option value="GLL">GLL - Galông ruợu</option>
+  <option value="GMC">GMC - Gam (hàm lượng KL)</option>
+  <option value="GRO">GRO - Tổng trọng lượng</option>
+  <option value="GT">GT - Tổng trọng tải</option>
+  <option value="HFT">HFT - 100 FT</option>
+  <option value="HGRM">HGRM - 100 GRAMME</option>
+  <option value="HKD">HKD - Dollar HongKong</option>
+  <option value="HKGM">HKGM - Tạ (100kg)</option>
+  <option value="HLTR">HLTR - Hectolit</option>
+  <option value="HMTR">HMTR - 100 mét</option>
+  <option value="HPCE">HPCE - 100 chiếc</option>
+  <option value="HUNV">HUNV - 100 viên/hạt</option>
+  <option value="IDR">IDR - Rupiah Indonesia</option>
+  <option value="INC">INC - Inch</option>
+  <option value="INC2">INC2 - Inch2</option>
+  <option value="INR">INR - Rupee Ấn Độ</option>
+  <option value="JPY">JPY - Yên Nhật</option>
+  <option value="KDW">KDW - Kilogam (tr.lg khô)</option>
+  <option value="KHR">KHR - Riel Cambodia</option>
+  <option value="KHW">KHW - Kilô/oắt giờ</option>
+  <option value="KIC">KIC - Kilogam (gồm cont.)</option>
+  <option value="KII">KII - Kilogam (gồm bao bì)</option>
+  <option value="KIT">KIT - KIT</option>
+  <option value="KL">KL - Kilo lít</option>
+  <option value="KMC">KMC - Kilogam (hàm lg KL)</option>
+  <option value="KMTK">KMTK - 1000 M2</option>
+  <option value="KMTQ">KMTQ - 1000m2</option>
+  <option value="KMTR">KMTR - Kilo mét (1000 mét)</option>
+  <option value="KPCE">KPCE - 1000 cái/chiếc</option>
+  <option value="KPIP">KPIP - 1000 ống</option>
+  <option value="KPKG">KPKG - 1000 gói</option>
+  <option value="KPR">KPR - 1000 đôi/cặp</option>
+  <option value="KPRO">KPRO - 1000 sản phẩm</option>
+  <option value="KROL">KROL - 1000 cuộn</option>
+  <option value="KRW">KRW - Won Hàn Quốc</option>
+  <option value="KSET">KSET - 1000 bộ/hệ thống</option>
+  <option value="KUNC">KUNC - 1000 con</option>
+  <option value="KUNK">KUNK - 1000 kiện/hộp/bao</option>
+  <option value="KUNQ">KUNQ - 1000 quả</option>
+  <option value="KUNV">KUNV - 1000 viên</option>
+  <option value="KVA">KVA - KVA</option>
+  <option value="LAK">LAK - Kip Lào</option>
+  <option value="LBR">LBR - Pao</option>
+  <option value="LC">LC - Hàm luợng lactoza</option>
+  <option value="LDW">LDW - Pao (trọng lg khô)</option>
+  <option value="LIC">LIC - Pao (gồm container)</option>
+  <option value="LIEU">LIEU - Liều</option>
+  <option value="LII">LII - Pao (gồm bao bì)</option>
+  <option value="LMC">LMC - Pao (hàm lượng KL)</option>
+  <option value="LTN">LTN - Tấn dài</option>
+  <option value="MDW">MDW - Tấn (trọng lg khô)</option>
+  <option value="MGRM">MGRM - Mili gram</option>
+  <option value="MIC">MIC - Tấn (gồm container)</option>
+  <option value="MII">MII - Tấn (gồm bao bì)</option>
+  <option value="MLT">MLT - Mili lít</option>
+  <option value="MM2">MM2 - mm2</option>
+  <option value="MM3">MM3 - mm3</option>
+  <option value="MMC">MMC - Tấn (hàm lượng KL)</option>
+  <option value="MMTR">MMTR - Mili mét</option>
+  <option value="MOP">MOP - Pataca MaCao</option>
+  <option value="MYR">MYR - Ringgit Malaysia</option>
+  <option value="NOK">NOK - Krone Na Uy</option>
+  <option value="NZD">NZD - Dollar New Zealand</option>
+  <option value="ODW">ODW - Ao/xơ (trọng lg khô)</option>
+  <option value="OIC">OIC - Ao/xơ (gồm cont.)</option>
+  <option value="OII">OII - Ao/xơ (gồm bao bì)</option>
+  <option value="OMC">OMC - Ao/xơ (hàm lượng KL)</option>
+  <option value="ONZ">ONZ - Ao/xơ</option>
+  <option value="OZI">OZI - Ao/xơ đong</option>
+  <option value="PKG">PKG - Gói (PACKS)</option>
+  <option value="PACKS">PACKS (PKG - Gói)</option>
+  <option value="PTI">PTI - Panh</option>
+  <option value="QT">QT - Lít Anh</option>
+  <option value="RAM">RAM - RAM</option>
+  <option value="RUB">RUB - Ruble Nga</option>
+  <option value="SEK">SEK - Krona Thụy Điển</option>
+  <option value="SGD">SGD - Dollar Singapore</option>
+  <option value="SOI">SOI - Sợi</option>
+  <option value="STER">STER - Ster</option>
+  <option value="STN">STN - Tấn ngắn</option>
+  <option value="TH">TH - Nghìn</option>
+  <option value="THB">THB - Baht Thái Lan</option>
+  <option value="TRO">TRO - Troi ao/xơ</option>
+  <option value="TRY">TRY - Lira Thổ Nhĩ Kỳ</option>
+  <option value="TWD">TWD - Dollar Đài Loan</option>
+  <option value="UND">UND - Tút</option>
+  <option value="UNH">UNH - Cành</option>
+  <option value="UNN">UNN - Cuốn</option>
+  <option value="UNQ">UNQ - Quả</option>
+  <option value="UNU">UNU - Củ</option>
+  <option value="USD">USD - USD</option>
+  <option value="YDK">YDK - I/át vuông</option>
+  <option value="YDQ">YDQ - I/át khối</option>
+  <option value="YRD">YRD - I/át</option>
 </datalist>
 
 <main>
@@ -461,7 +640,8 @@ mark{background:#fde047;border-radius:2px;padding:0 1px;color:#0f172a;font-weigh
       <span>Hàng cũ trước <input type="date" id="cut"></span>
       <label class="fl-chk"><input type="checkbox" id="hideold"> Ẩn hàng cũ</label>
       <label class="fl-chk"><input type="checkbox" id="hidebad" checked=""> Ẩn HS hết hiệu lực</label>
-      <button class="sm" style="margin-left:auto;background:linear-gradient(135deg,#2563eb,#4f46e5)" onclick="openBatch()" title="Dán hàng trăm/nghìn dòng hàng từ Excel để tra cứu HS hàng loạt và cảnh báo lệch mã">⚡ Tra cứu hàng loạt</button>
+      <button class="sm" style="margin-left:auto;background:linear-gradient(135deg,#059669,#10b981)" onclick="openTemplateModal()" title="Nạp trực tiếp bảng kê/invoice từ Excel với đầy đủ Số lượng 1, ĐVT 1, Lượng 2, ĐVT 2, Đơn giá, Xuất xứ">📥 Nạp bảng kê (Khung mẫu)</button>
+      <button class="sm" style="background:linear-gradient(135deg,#2563eb,#4f46e5)" onclick="openBatch()" title="Dán hàng trăm/nghìn dòng hàng từ Excel để tra cứu HS hàng loạt và cảnh báo lệch mã">⚡ Tra cứu hàng loạt</button>
     </div>
   </div>
 
@@ -493,6 +673,7 @@ mark{background:#fde047;border-radius:2px;padding:0 1px;color:#0f172a;font-weigh
         </div>
       </div>
       <div class="tb">
+        <button class="ok sm" onclick="openTemplateModal()" title="Nạp trực tiếp bảng kê/invoice từ Excel với đầy đủ Số lượng 1, ĐVT 1, Lượng 2, ĐVT 2, Đơn giá, Xuất xứ">📥 Nạp bảng kê (Khung mẫu)</button>
         <button class="soft sm" onclick="addBlank()" title="Phím tắt: Ctrl + Enter">＋ Dòng trống (Ctrl+Enter)</button>
         <button class="g sm" onclick="copyAllRows()" title="Copy toàn bộ dòng hàng từ trên xuống dưới để dán vào Excel / Google Sheets">📋 Copy cả bảng (Excel)</button>
         <button class="g sm" onclick="openFillDown(0)" title="Sao chép Mã HS, ĐVT, Xuất xứ, TS XK... từ dòng 1 xuống toàn bộ các dòng dưới">⤓ Chép từ dòng 1</button>
@@ -1620,7 +1801,7 @@ function openFillDown(fromIdx){
   });
 }
 
-/* Copy entire table from top to bottom as Excel-ready TSV */
+/* Copy entire table from top to bottom as Excel-ready TSV (Chiêu 2: Tự động bảo vệ Lượng 2) */
 function copyAllRows(){
   const L=CL();
   if(!L.length)return toast('Danh sách đang trống');
@@ -1629,23 +1810,35 @@ function copyAllRows(){
   const rows=[headers.join('\t')];
   L.forEach((r,i)=>{
     const[v,t]=calc(r);
-    const cols=[i+1,r.m,r.t,r.h,r.o,r.q,r.u,r.q2===''||r.q2==null?r.q:r.q2,r.u2||r.u,r.g,v,v,r.x,t,r.g];
+    let q2 = r.q2;
+    let u2 = r.u2;
+    if ((q2 === '' || q2 == null || q2 === 0) && (!u2 || isSameUnit(r.u, u2))) {
+      q2 = r.q;
+      u2 = u2 || r.u;
+    }
+    const cols=[i+1,r.m,r.t,r.h,r.o,r.q,r.u,q2===''||q2==null?r.q:q2,u2||r.u,r.g,v,v,r.x,t,r.g];
     rows.push(cols.map(cleanCell).join('\t'));
   });
   copyText(rows.join('\n'),`✓ Đã copy ${L.length} dòng (từ trên xuống dưới) — Ctrl+V thẳng vào Excel!`);
 }
 
-/* Export Excel for ECUS (exact 15 columns preserved) */
+/* Export Excel for ECUS (exact 15 columns preserved & Chiêu 2: Tự động bảo vệ Lượng 2) */
 function expX(){
   const L=CL();if(!L.length)return alert('Danh sách trống');
   const a=[['STT','Mã hàng','Tên hàng (mô tả chi tiết)','Mã HS','Xuất xứ','Lượng','Đơn vị tính','Lượng 2','Đơn vị tính 2','Đơn giá hóa đơn','Trị giá hóa đơn','Trị giá tính thuế','TS XK(%)','Tiền thuế XK','Đơn giá tính thuế']];
   L.forEach((r,i)=>{
     const[v,t]=calc(r);
-    a.push([i+1,r.m,r.t,r.h,r.o,r.q,r.u,r.q2===''||r.q2==null?r.q:r.q2,r.u2||r.u,r.g,v,v,r.x,t,r.g]);
+    let q2 = r.q2;
+    let u2 = r.u2;
+    if ((q2 === '' || q2 == null || q2 === 0) && (!u2 || isSameUnit(r.u, u2))) {
+      q2 = r.q;
+      u2 = u2 || r.u;
+    }
+    a.push([i+1,r.m,r.t,r.h,r.o,r.q,r.u,q2===''||q2==null?r.q:q2,u2||r.u,r.g,v,v,r.x,t,r.g]);
   });
   const wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(a),'Sheet1');
-  XLSX.writeFile(wb,ST.cur.replace(/[\\\/:*?"<>|]/g,'_')+'.xlsx');
+  XLSX.writeFile(wb,ST.cur.replace(/[\\/:*?"<>|]/g,'_')+'.xlsx');
   toast('✓ Đã xuất file Excel cho ECUS');
 }
 
@@ -2036,6 +2229,487 @@ function pushBatchToECUS(){
   $('pk').scrollTop=$('pk').scrollHeight;
   toast(`✓ Đã đẩy ${valid.length} dòng sang Danh sách xuất ECUS!`);
 }
+
+
+/* Bảng đơn vị tính chuẩn Hải quan VNACCS & Bộ quy đổi thông minh (DVT.xls) */
+const CUSTOMS_UNITS = [{"code": "DUNK", "name": "10 BAO"}, {"code": "DPCE", "name": "10 chiếc"}, {"code": "DMTR", "name": "10 mét"}, {"code": "HPCE", "name": "100 chiếc"}, {"code": "HFT", "name": "100 FT"}, {"code": "HGRM", "name": "100 GRAMME"}, {"code": "HMTR", "name": "100 mét"}, {"code": "HUNV", "name": "100 viên/hạt"}, {"code": "KSET", "name": "1000 bộ/hệ thống"}, {"code": "KPCE", "name": "1000 cái/chiếc"}, {"code": "KUNC", "name": "1000 con"}, {"code": "KROL", "name": "1000 cuộn"}, {"code": "KPR", "name": "1000 đôi/cặp"}, {"code": "KPKG", "name": "1000 gói"}, {"code": "KUNK", "name": "1000 kiện/hộp/bao"}, {"code": "KMTK", "name": "1000 M2"}, {"code": "KPIP", "name": "1000 ống"}, {"code": "KUNQ", "name": "1000 quả"}, {"code": "KPRO", "name": "1000 sản phẩm"}, {"code": "KUNV", "name": "1000 viên"}, {"code": "KMTQ", "name": "1000m2"}, {"code": "ONZ", "name": "Ao/xơ"}, {"code": "OII", "name": "Ao/xơ (gồm bao bì)"}, {"code": "OIC", "name": "Ao/xơ (gồm cont.)"}, {"code": "OMC", "name": "Ao/xơ (hàm lượng KL)"}, {"code": "ODW", "name": "Ao/xơ (trọng lg khô)"}, {"code": "OZI", "name": "Ao/xơ đong"}, {"code": "BAN", "name": "Bản"}, {"code": "BANG", "name": "Bảng"}, {"code": "BBL", "name": "Barrel"}, {"code": "BICH", "name": "Bịch"}, {"code": "SET", "name": "Bộ"}, {"code": "PCE", "name": "Cái/Chiếc"}, {"code": "UNH", "name": "Cành"}, {"code": "CT", "name": "Cara"}, {"code": "UNY", "name": "Cây"}, {"code": "CEN", "name": "Cen ti mét"}, {"code": "UNA", "name": "Chai/ Lọ/ Tuýp"}, {"code": "CHI", "name": "CHI"}, {"code": "CM2", "name": "cm2"}, {"code": "CM3", "name": "cm3"}, {"code": "UNC", "name": "Con"}, {"code": "CONT", "name": "CONTAINER"}, {"code": "UNU", "name": "Củ"}, {"code": "CUC", "name": "Cục"}, {"code": "CUM", "name": "Cụm"}, {"code": "UNN", "name": "Cuốn"}, {"code": "ROL", "name": "Cuộn"}, {"code": "DM", "name": "dm"}, {"code": "DM2", "name": "dm2"}, {"code": "PR", "name": "Đôi/Cặp"}, {"code": "GLL", "name": "Galông ruợu"}, {"code": "GRM", "name": "Gam"}, {"code": "GII", "name": "Gam (gồm bao bì)"}, {"code": "GIC", "name": "Gam (gồm container)"}, {"code": "GMC", "name": "Gam (hàm lượng KL)"}, {"code": "GDW", "name": "Gam (trọng lg khô)"}, {"code": "PKG", "name": "Gói"}, {"code": "LC", "name": "Hàm luợng lactoza"}, {"code": "HLTR", "name": "Hectolit"}, {"code": "YRD", "name": "I/át"}, {"code": "YDQ", "name": "I/át khối"}, {"code": "YDK", "name": "I/át vuông"}, {"code": "INC", "name": "Inch"}, {"code": "UNK", "name": "Kiện/Hộp/Bao/Gói"}, {"code": "KL", "name": "Kilo lít"}, {"code": "KMTR", "name": "Kilo mét (1000 mét)"}, {"code": "KHW", "name": "Kilô/oắt giờ"}, {"code": "KGM", "name": "Kilogam"}, {"code": "KII", "name": "Kilogam (gồm bao bì)"}, {"code": "KIC", "name": "Kilogam (gồm cont.)"}, {"code": "KMC", "name": "Kilogam (hàm lg KL)"}, {"code": "KDW", "name": "Kilogam (tr.lg khô)"}, {"code": "KIT", "name": "KIT"}, {"code": "KVA", "name": "KVA"}, {"code": "LIEU", "name": "Liều"}, {"code": "LTR", "name": "Lít"}, {"code": "QT", "name": "Lít Anh"}, {"code": "LOT", "name": "Lô (nhiều cái)"}, {"code": "UNL", "name": "Lon/Can"}, {"code": "MTR", "name": "Mét"}, {"code": "MTQ", "name": "Mét khối"}, {"code": "MTK", "name": "Mét vuông"}, {"code": "MGRM", "name": "Mili gram"}, {"code": "MLT", "name": "Mili lít"}, {"code": "MMTR", "name": "Mili mét"}, {"code": "MM2", "name": "mm2"}, {"code": "MM3", "name": "mm3"}, {"code": "TH", "name": "Nghìn"}, {"code": "PIP", "name": "Ống"}, {"code": "PTI", "name": "Panh"}, {"code": "LBR", "name": "Pao"}, {"code": "LII", "name": "Pao (gồm bao bì)"}, {"code": "LIC", "name": "Pao (gồm container)"}, {"code": "LMC", "name": "Pao (hàm lượng KL)"}, {"code": "LDW", "name": "Pao (trọng lg khô)"}, {"code": "FOT", "name": "Phút"}, {"code": "FTQ", "name": "Phút khối"}, {"code": "FTK", "name": "Phút vuông"}, {"code": "UNQ", "name": "Quả"}, {"code": "UNB", "name": "Quyển/Tập"}, {"code": "RAM", "name": "RAM"}, {"code": "SOI", "name": "Sợi"}, {"code": "STER", "name": "Ster"}, {"code": "DZN", "name": "Tá"}, {"code": "HKGM", "name": "Tạ (100kg)"}, {"code": "TAM", "name": "Tấm"}, {"code": "TNE", "name": "Tấn"}, {"code": "MII", "name": "Tấn (gồm bao bì)"}, {"code": "MIC", "name": "Tấn (gồm container)"}, {"code": "MMC", "name": "Tấn (hàm lượng KL)"}, {"code": "MDW", "name": "Tấn (trọng lg khô)"}, {"code": "LTN", "name": "Tấn dài"}, {"code": "STN", "name": "Tấn ngắn"}, {"code": "UNT", "name": "Thanh/Mảnh/Miếng"}, {"code": "TO", "name": "Tờ"}, {"code": "GRO", "name": "Tổng trọng lượng"}, {"code": "GT", "name": "Tổng trọng tải"}, {"code": "TRO", "name": "Troi ao/xơ"}, {"code": "DPT", "name": "Trọng tải"}, {"code": "BAG", "name": "Túi"}, {"code": "UND", "name": "Tút"}, {"code": "USD", "name": "USD"}, {"code": "UNV", "name": "Viên/Hạt"}, {"code": "UNIT", "name": "UNIT"}, {"code": "LBS", "name": "LBS"}, {"code": "VI", "name": "Vỉ"}, {"code": "INC2", "name": "Inch2"}, {"code": "SYS", "name": "Hệ thống"}, {"code": "EUR", "name": "EUR"}, {"code": "JPY", "name": "Yên Nhật"}, {"code": "GBP", "name": "Bảng Anh"}, {"code": "CHF", "name": "Franc Thụy Sĩ"}, {"code": "AUD", "name": "Dollar Australia"}, {"code": "CAD", "name": "Dollar Canada"}, {"code": "SEK", "name": "Krona Thụy Điển"}, {"code": "NOK", "name": "Krone Na Uy"}, {"code": "DKK", "name": "Krone Đan Mạch"}, {"code": "RUB", "name": "Ruble Nga"}, {"code": "NZD", "name": "Dollar New Zealand"}, {"code": "HKD", "name": "Dollar HongKong"}, {"code": "SGD", "name": "Dollar Singapore"}, {"code": "MYR", "name": "Ringgit Malaysia"}, {"code": "THB", "name": "Baht Thái Lan"}, {"code": "IDR", "name": "Rupiah Indonesia"}, {"code": "INR", "name": "Rupee Ấn Độ"}, {"code": "TWD", "name": "Dollar Đài Loan"}, {"code": "CNY", "name": "Nhân dân tệ"}, {"code": "KHR", "name": "Riel Cambodia"}, {"code": "LAK", "name": "Kip Lào"}, {"code": "MOP", "name": "Pataca MaCao"}, {"code": "TRY", "name": "Lira Thổ Nhĩ Kỳ"}, {"code": "KRW", "name": "Won Hàn Quốc"}, {"code": "BRL", "name": "Real Brasil"}, {"code": "ADMT", "name": "Air Dry Met Ton"}, {"code": "PRO", "name": "Sản phẩm"}, {"code": "PAIL", "name": "Thùng"}, {"code": "PAL", "name": "Pallet"}];
+const UNIT_KEY_MAP = {"dunk": "DUNK", "10bao": "DUNK", "dpce": "DPCE", "10chiec": "DPCE", "dmtr": "DMTR", "10met": "DMTR", "hpce": "HPCE", "100chiec": "HPCE", "hft": "HFT", "100ft": "HFT", "hgrm": "HGRM", "100gramme": "HGRM", "hmtr": "HMTR", "100met": "HMTR", "hunv": "HUNV", "100vienhat": "HUNV", "100vien": "HUNV", "hat": "UNV", "kset": "KSET", "1000bohethong": "KSET", "1000bo": "KSET", "hethong": "SYS", "kpce": "KPCE", "1000caichiec": "KPCE", "1000cai": "KPCE", "chiec": "PCE", "kunc": "KUNC", "1000con": "KUNC", "krol": "KROL", "1000cuon": "KROL", "kpr": "KPR", "1000doicap": "KPR", "1000doi": "KPR", "cap": "PR", "kpkg": "KPKG", "1000goi": "KPKG", "kunk": "KUNK", "1000kienhopbao": "KUNK", "1000kien": "KUNK", "hop": "UNK", "bao": "BAG", "kmtk": "KMTK", "1000m2": "KMTQ", "kpip": "KPIP", "1000ong": "KPIP", "kunq": "KUNQ", "1000qua": "KUNQ", "kpro": "KPRO", "1000sanpham": "KPRO", "kunv": "KUNV", "1000vien": "KUNV", "kmtq": "KMTQ", "onz": "ONZ", "aoxo": "ONZ", "ao": "ONZ", "xo": "ONZ", "oii": "OII", "aoxogombaobi": "OII", "gombaobi": "OII", "oic": "OIC", "aoxogomcont": "OIC", "gomcont": "OIC", "omc": "OMC", "aoxohamluongkl": "OMC", "hamluongkl": "OMC", "odw": "ODW", "aoxotronglgkho": "ODW", "tronglgkho": "ODW", "ozi": "OZI", "aoxodong": "OZI", "xodong": "OZI", "ban": "BAN", "bang": "BANG", "bbl": "BBL", "barrel": "PAIL", "bich": "BICH", "set": "SET", "bo": "SET", "pce": "PCE", "caichiec": "PCE", "cai": "PCE", "unh": "UNH", "canh": "UNH", "ct": "CT", "cara": "CT", "uny": "UNY", "cay": "UNY", "cen": "CEN", "centimet": "CEN", "una": "UNA", "chailotuyp": "UNA", "chai": "UNA", "lo": "LOT", "tuyp": "UNA", "chi": "CHI", "cm2": "CM2", "cm3": "CM3", "unc": "UNC", "con": "UNC", "cont": "CONT", "container": "CONT", "unu": "UNU", "cu": "UNU", "cuc": "CUC", "cum": "CUM", "unn": "UNN", "cuon": "ROL", "rol": "ROL", "dm": "DM", "dm2": "DM2", "pr": "PR", "doicap": "PR", "doi": "PR", "gll": "GLL", "galongruou": "GLL", "grm": "GRM", "gam": "GRM", "gii": "GII", "gamgombaobi": "GII", "gic": "GIC", "gamgomcontainer": "GIC", "gomcontainer": "GIC", "gmc": "GMC", "gamhamluongkl": "GMC", "gdw": "GDW", "gamtronglgkho": "GDW", "pkg": "PKG", "goi": "PKG", "lc": "LC", "hamluonglactoza": "LC", "hltr": "HLTR", "hectolit": "HLTR", "yrd": "YRD", "iat": "YRD", "at": "YRD", "ydq": "YDQ", "iatkhoi": "YDQ", "atkhoi": "YDQ", "ydk": "YDK", "iatvuong": "YDK", "atvuong": "YDK", "inc": "INC", "inch": "INC", "unk": "UNK", "kienhopbaogoi": "UNK", "kien": "UNK", "kl": "KL", "kilolit": "KL", "kmtr": "KMTR", "kilomet1000met": "KMTR", "kilomet": "KMTR", "1000met": "KMTR", "khw": "KHW", "kilooatgio": "KHW", "kilo": "KGM", "oatgio": "KHW", "kgm": "KGM", "kilogam": "KGM", "kii": "KII", "kilogamgombaobi": "KII", "kic": "KIC", "kilogamgomcont": "KIC", "kmc": "KMC", "kilogamhamlgkl": "KMC", "hamlgkl": "KMC", "kdw": "KDW", "kilogamtrlgkho": "KDW", "trlgkho": "KDW", "kit": "KIT", "kva": "KVA", "lieu": "LIEU", "ltr": "LTR", "lit": "LTR", "qt": "QT", "litanh": "QT", "lot": "LOT", "lonhieucai": "LOT", "nhieucai": "LOT", "unl": "UNL", "loncan": "UNL", "lon": "UNL", "can": "UNL", "mtr": "MTR", "met": "MTR", "mtq": "MTQ", "metkhoi": "MTQ", "mtk": "MTK", "metvuong": "MTK", "mgrm": "MGRM", "miligram": "MGRM", "mlt": "MLT", "mililit": "MLT", "mmtr": "MMTR", "milimet": "MMTR", "mm2": "MM2", "mm3": "MM3", "th": "TH", "nghin": "TH", "pip": "PIP", "ong": "PIP", "pti": "PTI", "panh": "PTI", "lbr": "LBR", "pao": "LBR", "lii": "LII", "paogombaobi": "LII", "lic": "LIC", "paogomcontainer": "LIC", "lmc": "LMC", "paohamluongkl": "LMC", "ldw": "LDW", "paotronglgkho": "LDW", "fot": "FOT", "phut": "FOT", "ftq": "FTQ", "phutkhoi": "FTQ", "ftk": "FTK", "phutvuong": "FTK", "unq": "UNQ", "qua": "UNQ", "unb": "UNB", "quyentap": "UNB", "quyen": "UNB", "tap": "UNB", "ram": "RAM", "soi": "SOI", "ster": "STER", "dzn": "DZN", "ta": "DZN", "hkgm": "HKGM", "ta100kg": "HKGM", "100kg": "HKGM", "tam": "TAM", "tne": "TNE", "tan": "TNE", "mii": "MII", "tangombaobi": "MII", "mic": "MIC", "tangomcontainer": "MIC", "mmc": "MMC", "tanhamluongkl": "MMC", "mdw": "MDW", "tantronglgkho": "MDW", "ltn": "LTN", "tandai": "LTN", "stn": "STN", "tanngan": "STN", "unt": "UNT", "thanhmanhmieng": "UNT", "thanh": "UNT", "manh": "UNT", "mieng": "UNT", "to": "TO", "gro": "GRO", "tongtrongluong": "GRO", "gt": "GT", "tongtrongtai": "GT", "tro": "TRO", "troiaoxo": "TRO", "troiao": "TRO", "dpt": "DPT", "trongtai": "DPT", "bag": "BAG", "tui": "BAG", "und": "UND", "tut": "UND", "usd": "USD", "unv": "UNV", "vienhat": "UNV", "vien": "UNV", "unit": "UNIT", "lbs": "LBS", "vi": "VI", "inc2": "INC2", "inch2": "INC2", "sys": "SET", "eur": "EUR", "jpy": "JPY", "yennhat": "JPY", "gbp": "GBP", "banganh": "GBP", "chf": "CHF", "francthuysi": "CHF", "aud": "AUD", "dollaraustralia": "AUD", "cad": "CAD", "dollarcanada": "CAD", "sek": "SEK", "kronathuydien": "SEK", "nok": "NOK", "kronenauy": "NOK", "dkk": "DKK", "kronedanmach": "DKK", "rub": "RUB", "rublenga": "RUB", "nzd": "NZD", "dollarnewzealand": "NZD", "hkd": "HKD", "dollarhongkong": "HKD", "sgd": "SGD", "dollarsingapore": "SGD", "myr": "MYR", "ringgitmalaysia": "MYR", "thb": "THB", "bahtthailan": "THB", "idr": "IDR", "rupiahindonesia": "IDR", "inr": "INR", "rupeeando": "INR", "twd": "TWD", "dollardailoan": "TWD", "cny": "CNY", "nhandante": "CNY", "khr": "KHR", "rielcambodia": "KHR", "lak": "LAK", "kiplao": "LAK", "mop": "MOP", "patacamacao": "MOP", "try": "TRY", "lirathonhiky": "TRY", "krw": "KRW", "wonhanquoc": "KRW", "brl": "BRL", "realbrasil": "BRL", "admt": "ADMT", "airdrymetton": "ADMT", "pro": "PRO", "sanpham": "PRO", "pail": "PAIL", "thung": "PAIL", "pal": "PAL", "pallet": "PAL", "pcs": "PCE", "pc": "PCE", "piece": "UNT", "pieces": "PCE", "ea": "PCE", "each": "PCE", "item": "PCE", "items": "PCE", "units": "PCE", "kg": "KGM", "kgs": "KGM", "kilogram": "KGM", "kilogramme": "KGM", "kilogrammes": "KGM", "sets": "SET", "system": "SYS", "m": "MTQ", "meter": "MTR", "meters": "MTR", "metres": "MTR", "m2": "MTK", "sqm": "MTK", "squaremetres": "MTK", "m3": "MTQ", "cbm": "MTQ", "cubicmetres": "MTQ", "l": "LTR", "liter": "LTR", "liters": "LTR", "litres": "LTR", "ton": "TNE", "tons": "TNE", "tonne": "TNE", "metrictons": "TNE", "roll": "ROL", "rolls": "ROL", "sheet": "TAM", "sheets": "TAM", "la": "TAM", "leaf": "TO", "leaves": "TO", "pipe": "PIP", "pipes": "PIP", "tube": "UNA", "tubes": "UNA", "pair": "PR", "pairs": "PR", "doz": "DZN", "dozen": "DZN", "tuyt": "UNA", "bottle": "UNA", "bottles": "UNA", "thungphi": "PAIL", "drum": "PAIL", "barrels": "PAIL", "pallets": "PAL", "bags": "BAG", "blister": "VI", "pack": "PKG", "packs": "PKG", "package": "PKG", "packages": "PKG", "box": "UNK", "boxes": "UNK", "ctn": "UNK", "ctns": "UNK", "carton": "UNK", "cartons": "UNK", "bar": "UNT", "strip": "UNT", "book": "UNB", "g": "GRM", "gr": "GRM", "gram": "GRM", "gramme": "GRM", "miligam": "MGRM", "mg": "MGRM", "pill": "UNV", "product": "PRO"};
+const UNIT_EN_MAP = {"PCE": "PIECES", "KGM": "KILO-GRAMMES", "SET": "SETS", "MTR": "METRES", "MTK": "SQUARE METRES", "MTQ": "CUBIC METRES", "LTR": "LITRES", "TNE": "TONNE", "ROL": "ROLL", "TAM": "TAM", "TO": "TO", "PIP": "PIPE", "PR": "PAIR", "DZN": "DOZEN", "UNA": "BOTTLE", "UNL": "CAN", "PAIL": "BARRELS", "PAL": "PALLET", "BAG": "BAG", "BICH": "BICH", "VI": "VI", "PKG": "PACKS", "UNK": "BOX", "UNT": "PIECE", "UNY": "CAY", "UNC": "CON", "UNB": "BOOK", "UNV": "PILL", "GRM": "GRAMME", "SYS": "SYSTEM", "PRO": "PRODUCT", "LOT": "LOT", "UNIT": "UNIT"};
+const CUSTOMS_CODE_MAP = new Map(CUSTOMS_UNITS.map(u => [u.code, u.name]));
+
+function cleanUnitStr(s) {
+  if (!s) return '';
+  return String(s)
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[đĐ]/g, 'd')
+    .replace(/[^a-z0-9]/g, '')
+    .trim();
+}
+
+function getUnitInfo(raw) {
+  if (!raw) return null;
+  const s = String(raw).trim();
+  const k = cleanUnitStr(s);
+  const code = UNIT_KEY_MAP[k] || (CUSTOMS_CODE_MAP.has(s.toUpperCase()) ? s.toUpperCase() : null);
+  if (code) {
+    const name = CUSTOMS_CODE_MAP.get(code) || '';
+    const en = UNIT_EN_MAP[code] || '';
+    return { code, name, en, raw: s };
+  }
+  return null;
+}
+
+/* Chuẩn hóa đơn vị tính về chuẩn VNACCS/ECUS */
+function normUnit(raw, format = 'standard') {
+  if (!raw) return '';
+  const info = getUnitInfo(raw);
+  if (!info) return String(raw).trim();
+  if (format === 'code') return info.code;
+  if (format === 'name') return info.name;
+  if (format === 'en' && info.en) return info.en;
+  // Default 'standard': if DB / ECUS commonly uses English (like PIECES, KILO-GRAMMES), return English; otherwise Code
+  return info.en || info.code;
+}
+
+/* Kiểm tra xem 2 đơn vị tính có phải là CÙNG MỘT ĐƠN VỊ hay không (Chiêu 2) */
+function isSameUnit(u1, u2) {
+  if (!u1 && !u2) return true;
+  if (!u1 || !u2) return false;
+  const s1 = String(u1).trim().toUpperCase();
+  const s2 = String(u2).trim().toUpperCase();
+  if (s1 === s2) return true;
+  const info1 = getUnitInfo(u1);
+  const info2 = getUnitInfo(u2);
+  if (info1 && info2) return info1.code === info2.code;
+  return cleanUnitStr(u1) === cleanUnitStr(u2);
+}
+
+
+function parseNum(val) {
+  if (val == null) return 0;
+  let s = String(val).trim().replace(/[$₫¥€\s]/g, '');
+  if (!s) return 0;
+  if (s.includes(',') && s.includes('.')) {
+    if (s.lastIndexOf(',') > s.lastIndexOf('.')) {
+      s = s.replace(/\./g, '').replace(',', '.');
+    } else {
+      s = s.replace(/,/g, '');
+    }
+  } else if (s.includes(',')) {
+    const parts = s.split(',');
+    if (parts.length === 2 && parts[1].length === 3) {
+      s = parts[0] + parts[1];
+    } else {
+      s = s.replace(',', '.');
+    }
+  }
+  const n = parseFloat(s);
+  return isNaN(n) ? 0 : n;
+}
+
+/* ================= KHUNG MẪU NẠP BẢNG KÊ / INVOICE VÀO ECUS ================= */
+let TPL_RES = [];
+let TPL_TAB = 'all';
+
+function downloadTemplateExcel() {
+  const headers = ['Mã hàng (Part No)', 'Tên hàng (mô tả chi tiết) *', 'Số lượng 1', 'Đơn vị tính 1', 'Lượng 2 (hoặc Net Weight)', 'Đơn vị tính 2', 'Đơn giá hóa đơn', 'Xuất xứ'];
+  const sampleData = [
+    headers,
+    ['A001-PET', 'Tem bằng nhựa PET trắng mờ có in, kt: 93.66x18.3mm, mới 100%', 1000, 'PCE', 1000, 'PCE', 0.15, 'CN'],
+    ['B002-OIL', 'Dầu bôi trơn công nghiệp gốc khoáng, đóng phuy 200L', 5, 'phuy', 900, 'KGM', 450, 'JP'],
+    ['C003-VAL', 'Bộ van điều áp khí nén chuyên dụng', 20, 'SET', 20, 'SET', 12.5, 'KR'],
+    ['D004-STE', 'Tấm thép không gỉ cán nguội 1.2mm x 1200mm x 2400mm', 50, 'TAM', 1250, 'KGM', 45.0, 'VN']
+  ];
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(sampleData);
+  ws['!cols'] = [
+    { wch: 18 }, { wch: 50 }, { wch: 14 }, { wch: 15 },
+    { wch: 22 }, { wch: 15 }, { wch: 16 }, { wch: 12 }
+  ];
+  XLSX.utils.book_append_sheet(wb, ws, 'Khung_mau_Bang_ke');
+  XLSX.writeFile(wb, 'Mau_Bang_Ke_Hoa_Don_ECUS.xlsx');
+  toast('✓ Đã tải file mẫu Mau_Bang_Ke_Hoa_Don_ECUS.xlsx');
+}
+
+function openTemplateModal() {
+  const mc = $('pm').querySelector('.mc');
+  mc.classList.add('wide');
+  const body = `
+    <div class="tpl-top">
+      <div class="tpl-guide">
+        <div class="tpl-guide-title">
+          <span>💡 <b>Khung 8 cột chuẩn hóa từ Invoice / Packing List vào ECUS:</b></span>
+          <button class="ok sm" onclick="downloadTemplateExcel()" style="margin-left:auto;background:linear-gradient(135deg,#059669,#10b981)">⬇ Tải file mẫu Excel (.xlsx)</button>
+        </div>
+        <div class="tpl-cols-bar">
+          <span class="tpl-col-badge">1. Mã hàng</span>
+          <span class="tpl-col-badge req">2. Tên hàng *</span>
+          <span class="tpl-col-badge">3. Số lượng 1</span>
+          <span class="tpl-col-badge">4. ĐVT 1</span>
+          <span class="tpl-col-badge">5. Lượng 2 / NW</span>
+          <span class="tpl-col-badge">6. ĐVT 2</span>
+          <span class="tpl-col-badge">7. Đơn giá</span>
+          <span class="tpl-col-badge">8. Xuất xứ</span>
+        </div>
+      </div>
+      <textarea id="tplIn" placeholder="Dán (Ctrl+V) các cột từ file Excel Invoice/Packing List của bạn vào đây...&#10;Hệ thống tự động:&#10;1. Nhận diện các cột (kể cả copy thiếu cột hay đảo vị trí Tên hàng - Mã hàng)&#10;2. Chuẩn hóa ĐVT theo bảng mã chuẩn Hải quan VNACCS (DVT.xls)&#10;3. Tự động áp dụng Chiêu 2: Điền Lượng 2 = Lượng 1 khi ĐVT 2 trùng ĐVT 1 (hoặc để trống)&#10;4. Tự động tra cứu mã HS &amp; ưu tiên mã tích xanh 🛡️ đã chốt chuẩn"></textarea>
+      <div class="tpl-ctrl">
+        <button onclick="runTemplateParse()" style="padding:9px 16px;font-size:13.5px;font-weight:700">⚡ Xử lý bảng kê &amp; Khớp mã HS</button>
+        <input type="file" id="tplFile" accept=".xlsx,.xls,.csv" hidden>
+        <button class="g sm" onclick="$('tplFile').click()">📂 Hoặc chọn file Excel (.xlsx / .xls)</button>
+        <div class="tpl-opts">
+          <label class="fl-chk" style="font-size:12px;font-weight:600;color:#047857"><input type="checkbox" id="tplAutoSyncQ2" checked> ⚡ Chiêu 2: Điền Lượng 2 = Lượng 1</label>
+          <label class="fl-chk" style="font-size:12px;color:var(--tx2)"><input type="checkbox" id="tplNormUnit" checked> Chuẩn hóa ĐVT (DVT.xls)</label>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--tx2)">
+            <span>Định dạng ĐVT:</span>
+            <select id="tplUnitFmt" style="font-size:12px;padding:3px 6px">
+              <option value="code" selected>Mã Hải quan (PCE, KGM, SET...)</option>
+              <option value="en">Tiếng Anh VNACCS (PIECES, KILO-GRAMMES...)</option>
+              <option value="name">Tiếng Việt (Cái/Chiếc, Kilogam...)</option>
+            </select>
+          </div>
+        </div>
+        <button class="r-soft xs" onclick="clearTemplateInput()">✕ Xóa nháp</button>
+      </div>
+    </div>
+    <div id="tplStats"></div>
+    <div id="tplOut"></div>
+    <div class="bl-acts" id="tplActs" style="display:none">
+      <button class="ok" onclick="pushTemplateToECUS()">➕ Đẩy toàn bộ vào Danh sách ECUS (Lô: <span id="tplCurLot">${esc(ST.cur)}</span>)</button>
+      <button class="soft" onclick="exportTemplateExcel()">⬇ Xuất file Excel chuẩn ECUS</button>
+      <button class="g" onclick="copyTemplateResult()">📋 Copy bảng (dán sang Excel)</button>
+    </div>
+  `;
+  modal('📥 Nạp bảng kê hóa đơn / Invoice vào ECUS (Khung mẫu)', body, '', () => {});
+
+  const closeBtn = $('pm').querySelector('.mf .g');
+  closeBtn.onclick = () => { mc.classList.remove('wide'); $('pm').style.display = 'none'; };
+  $('pm').onclick = e => { if (e.target === $('pm')) { mc.classList.remove('wide'); $('pm').style.display = 'none'; } };
+
+  $('tplFile').onchange = async e => {
+    const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+    try {
+      const wb = await readWb(f);
+      const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: '', raw: false });
+      if (!rows.length) return alert('File Excel không có dữ liệu');
+      const lines = rows.map(r => r.join('\t').replace(/[\r\n]+/g, ' '));
+      $('tplIn').value = lines.join('\n');
+      runTemplateParse();
+    } catch (x) { alert('Lỗi đọc file: ' + x.message); }
+  };
+
+  setTimeout(() => $('tplIn').focus(), 50);
+}
+
+function clearTemplateInput() {
+  $('tplIn').value = '';
+  TPL_RES = [];
+  $('tplStats').innerHTML = '';
+  $('tplOut').innerHTML = '';
+  $('tplActs').style.display = 'none';
+}
+
+function parseTemplateText(rawText, opts = {}) {
+  const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  if (!lines.length) return [];
+
+  const isHeader = str => {
+    const s = cleanUnitStr(str);
+    return /mahang|partno|itemcode|tenhang|description|mota|soluong|soluong1|qty|quantity|dvt|dvt1|uom|unit|luong2|soluong2|netweight|nw|dongia|unitprice|price|xuatxu|origin|coo/.test(s);
+  };
+
+  let startIndex = 0;
+  const firstRowCols = lines[0].split('\t').map(c => c.trim());
+  if (firstRowCols.some(isHeader)) {
+    startIndex = 1;
+  }
+
+  const parsed = [];
+  for (let i = startIndex; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line) continue;
+    const cols = line.split('\t').map(c => c.replace(/^["']|["']$/g, '').trim());
+
+    let m = '', t = '', q = 1, u = '', q2 = '', u2 = '', g = 0, o = '';
+
+    if (cols.length >= 8) {
+      m = cols[0]; t = cols[1]; q = parseNum(cols[2]) || 1; u = cols[3];
+      q2 = cols[4] !== '' ? parseNum(cols[4]) : ''; u2 = cols[5]; g = parseNum(cols[6]); o = cols[7];
+    } else if (cols.length === 7) {
+      m = cols[0]; t = cols[1]; q = parseNum(cols[2]) || 1; u = cols[3];
+      q2 = cols[4] !== '' ? parseNum(cols[4]) : ''; u2 = cols[5]; g = parseNum(cols[6]);
+    } else if (cols.length === 6) {
+      m = cols[0]; t = cols[1]; q = parseNum(cols[2]) || 1; u = cols[3];
+      if (/^[A-Za-z]{2}$/.test(cols[5])) {
+        g = parseNum(cols[4]); o = cols[5].toUpperCase();
+      } else {
+        q2 = cols[4] !== '' ? parseNum(cols[4]) : ''; u2 = cols[5];
+      }
+    } else if (cols.length === 5) {
+      m = cols[0]; t = cols[1]; q = parseNum(cols[2]) || 1; u = cols[3]; g = parseNum(cols[4]);
+    } else if (cols.length === 4) {
+      if (cleanUnitStr(cols[3]) && (getUnitInfo(cols[3]) || isNaN(cols[3]))) {
+        m = cols[0]; t = cols[1]; q = parseNum(cols[2]) || 1; u = cols[3];
+      } else {
+        t = cols[0]; q = parseNum(cols[1]) || 1; u = cols[2]; g = parseNum(cols[3]);
+      }
+    } else if (cols.length === 3) {
+      t = cols[0]; q = parseNum(cols[1]) || 1; u = cols[2];
+    } else if (cols.length === 2) {
+      t = cols[0]; q = parseNum(cols[1]) || 1;
+    } else {
+      t = cols[0];
+    }
+
+    if (m && t && m.length > 30 && t.length <= 20 && !m.includes('\t') && /^[A-Za-z0-9\-_./]+$/.test(t)) {
+      const temp = m; m = t; t = temp;
+    }
+
+    if (!m && t) {
+      const codeMatch = t.match(/\(([A-Za-z0-9\-_.]{3,30})\)/);
+      if (codeMatch) m = codeMatch[1];
+    }
+
+    const rawU = u;
+    const rawU2 = u2;
+    if (opts.normUnit !== false) {
+      u = normUnit(u, opts.unitFormat || 'code');
+      if (u2) u2 = normUnit(u2, opts.unitFormat || 'code');
+    }
+
+    const hsMatch = matchOneLine(t, true);
+    let matchedHs = hsMatch.hs || '';
+    if (!o && hsMatch.o) o = hsMatch.o;
+
+    let autoSynced = false;
+    if (opts.autoSyncQ2 !== false) {
+      if (q2 === '' || q2 === 0 || q2 == null) {
+        if (!u2 || isSameUnit(u, u2)) {
+          q2 = q;
+          u2 = u2 || u;
+          autoSynced = true;
+        }
+      }
+    }
+
+    parsed.push({
+      idx: i + 1,
+      m, t, hs: matchedHs,
+      hsMatch,
+      q, u, q2, u2, g, o,
+      rawU, rawU2,
+      autoSynced,
+      totalVal: q * g
+    });
+  }
+
+  return parsed;
+}
+
+function runTemplateParse() {
+  const raw = $('tplIn').value;
+  if (!raw.trim()) return toast('Hãy dán dữ liệu bảng kê từ Excel vào ô nhập');
+  const autoSyncQ2 = $('tplAutoSyncQ2') ? $('tplAutoSyncQ2').checked : true;
+  const doNormUnit = $('tplNormUnit') ? $('tplNormUnit').checked : true;
+  const unitFmt = $('tplUnitFmt') ? $('tplUnitFmt').value : 'code';
+
+  const t0 = performance.now();
+  TPL_RES = parseTemplateText(raw, { autoSyncQ2, normUnit: doNormUnit, unitFormat: unitFmt });
+  const ms = Math.round(performance.now() - t0);
+  TPL_TAB = 'all';
+  renderTemplatePreview();
+  toast(`✓ Đã nạp và xử lý ${TPL_RES.length} dòng hàng (${ms}ms)!`);
+}
+
+function renderTemplatePreview() {
+  if (!TPL_RES.length) {
+    $('tplStats').innerHTML = '';
+    $('tplOut').innerHTML = '<div class="m" style="padding:20px">Chưa có dòng dữ liệu nào được nhận diện.</div>';
+    $('tplActs').style.display = 'none';
+    return;
+  }
+
+  const cAll = TPL_RES.length;
+  let cOk = 0, cWarn = 0, cBad = 0, cEmpty = 0, cSync = 0;
+  let totQ = 0, totVal = 0;
+
+  for (const r of TPL_RES) {
+    const st = r.hsMatch ? r.hsMatch.status : 'empty';
+    if (st === 'ok') cOk++;
+    else if (st === 'warn') cWarn++;
+    else if (st === 'bad') cBad++;
+    else if (st === 'empty') cEmpty++;
+    if (r.autoSynced) cSync++;
+    totQ += Number(r.q) || 0;
+    totVal += Number(r.totalVal) || 0;
+  }
+
+  $('tplStats').innerHTML = `
+    <div class="bl-stats" style="justify-content:space-between">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+        <span class="bl-tab${TPL_TAB==='all'?' on':''}" onclick="TPL_TAB='all';renderTemplatePreview()">Tất cả (${cAll})</span>
+        <span class="bl-tab${TPL_TAB==='ok'?' on':''}" onclick="TPL_TAB='ok';renderTemplatePreview()">🟢 Khớp chuẩn (${cOk})</span>
+        ${cWarn?`<span class="bl-tab${TPL_TAB==='warn'?' on':''}" onclick="TPL_TAB='warn';renderTemplatePreview()">🟡 Lệch mã HS (${cWarn})</span>`:''}
+        ${cBad?`<span class="bl-tab${TPL_TAB==='bad'?' on':''}" onclick="TPL_TAB='bad';renderTemplatePreview()">🔴 Hết HL (${cBad})</span>`:''}
+        <span class="bl-tab${TPL_TAB==='empty'?' on':''}" onclick="TPL_TAB='empty';renderTemplatePreview()">⚪ Hàng mới (${cEmpty})</span>
+      </div>
+      <div style="font-size:12px;color:var(--tx2);display:flex;gap:12px;align-items:center">
+        <span style="color:#047857;font-weight:600">⚡ Đồng bộ Lượng 2: <b>${cSync}/${cAll}</b> dòng</span>
+        <span>Tổng SL: <b>${fm(totQ)}</b></span>
+        <span>Trị giá: <b style="color:var(--ok)">${fm(totVal)}</b></span>
+      </div>
+    </div>
+  `;
+
+  const rows = TPL_RES.map((r, i) => ({ r, i })).filter(({ r }) => {
+    if (TPL_TAB === 'all') return true;
+    const st = r.hsMatch ? r.hsMatch.status : 'empty';
+    return st === TPL_TAB;
+  });
+
+  const limit = 500;
+  const slice = rows.slice(0, limit);
+
+  $('tplOut').innerHTML = `
+    <div class="bl-wrap"><table class="bl-tbl">
+      <thead><tr>
+        <th style="width:36px">#</th>
+        <th style="width:110px">Mã hàng</th>
+        <th>Tên hàng (mô tả chi tiết)</th>
+        <th style="width:125px">Mã HS</th>
+        <th style="width:65px">SL 1</th>
+        <th style="width:68px">ĐVT 1</th>
+        <th style="width:105px">Lượng 2 (NW)</th>
+        <th style="width:68px">ĐVT 2</th>
+        <th style="width:75px">Đơn giá</th>
+        <th style="width:85px">Trị giá</th>
+        <th style="width:55px">XX</th>
+        <th>Trạng thái tra cứu HS</th>
+      </tr></thead>
+      <tbody>
+        ${slice.map(({ r, i }) => {
+          const isVer = isHsVerified(r.t, r.hs);
+          let hsCell = '';
+          if (r.hsMatch && r.hsMatch.status === 'warn' && r.hsMatch.alts.length > 1) {
+            hsCell = `<select class="hs-pick" onchange="TPL_RES[${i}].hs=this.value;renderTemplatePreview()">` +
+              r.hsMatch.alts.map(g => `<option value="${esc(g.h)}"${g.h===r.hs?' selected':''}>${esc(g.h)} (${g.n}x)</option>`).join('') + `</select>`;
+          } else if (r.hs) {
+            hsCell = `<span style="font-family:var(--mono);font-weight:700;color:#1e3a8a">${esc(r.hs)}</span>` +
+              (isVer ? '<br><span class="badge-ver">🛡️ Chốt chuẩn</span>' : '');
+          } else {
+            hsCell = '<span style="color:var(--tx3)">—</span>';
+          }
+
+          const stClass = r.hsMatch ? r.hsMatch.status : 'empty';
+          const syncBadge = r.autoSynced ? '<span class="badge-sync" title="Tự động đồng bộ Lượng 2 = Lượng 1 (Chiêu 2)">⚡ = SL1</span>' : '';
+
+          return `<tr class="st-${stClass}">
+            <td style="font-family:var(--mono);color:var(--tx3)">${i+1}</td>
+            <td><span style="font-family:var(--mono);font-weight:600">${esc(r.m||'—')}</span></td>
+            <td>${esc(r.t)}</td>
+            <td>${hsCell}</td>
+            <td style="font-family:var(--mono);text-align:right">${fm(r.q)}</td>
+            <td><b style="color:#0369a1">${esc(r.u)}</b></td>
+            <td style="font-family:var(--mono);text-align:right">${r.q2!==''?fm(r.q2):'—'} ${syncBadge}</td>
+            <td><b style="color:#0284c7">${esc(r.u2)}</b></td>
+            <td style="font-family:var(--mono);text-align:right">${r.g?fm(r.g):'0'}</td>
+            <td style="font-family:var(--mono);text-align:right;color:var(--ok);font-weight:600">${fm(r.totalVal)}</td>
+            <td style="font-family:var(--mono);font-weight:600">${esc(r.o||'—')}</td>
+            <td><div class="bl-note ${stClass}">${esc(r.hsMatch ? r.hsMatch.note : 'Chưa có DL')}</div></td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table></div>
+    ${rows.length > limit ? `<div style="font-size:12px;color:var(--tx3);padding:6px 2px">Đang hiển thị ${limit}/${rows.length} dòng đầu để đảm bảo tốc độ — khi Đẩy sang ECUS hoặc Xuất Excel sẽ lấy ĐẦY ĐỦ 100% cả ${TPL_RES.length} dòng.</div>` : ''}
+  `;
+
+  $('tplActs').style.display = 'flex';
+  if ($('tplCurLot')) $('tplCurLot').textContent = ST.cur;
+}
+
+function pushTemplateToECUS() {
+  if (!TPL_RES.length) return toast('Không có dòng hàng nào để đẩy sang');
+  const L = CL();
+  let count = 0;
+  for (const r of TPL_RES) {
+    if (!r.t.trim()) continue;
+    let finalQ2 = r.q2;
+    let finalU2 = r.u2;
+    if ((finalQ2 === '' || finalQ2 == null || finalQ2 === 0) && (!finalU2 || isSameUnit(r.u, finalU2))) {
+      finalQ2 = r.q;
+      finalU2 = finalU2 || r.u;
+    }
+    L.push({
+      m: r.m || '',
+      t: r.t.trim(),
+      h: r.hs || '',
+      o: r.o || (r.hsMatch ? r.hsMatch.o : '') || '',
+      q: Number(r.q) || 1,
+      u: r.u || '',
+      q2: finalQ2 !== '' ? Number(finalQ2) : '',
+      u2: finalU2 || '',
+      g: Number(r.g) || 0,
+      x: r.hsMatch ? Number(r.hsMatch.x) || 0 : 0,
+      k: '',
+      p: r.hsMatch ? r.hsMatch.p || '' : '',
+      lh: r.hsMatch ? r.hsMatch.lh || '' : '',
+      dir: r.hsMatch && r.hsMatch.lh ? getDirInfo(r.hsMatch.lh).dir : 'unk'
+    });
+    count++;
+  }
+  save();
+  drawL();
+  $('pm').querySelector('.mc').classList.remove('wide');
+  $('pm').style.display = 'none';
+  $('pk').scrollTop = $('pk').scrollHeight;
+  toast(`✓ Đã nạp thành công ${count} dòng vào Danh sách ECUS (Lô: ${ST.cur})!`);
+}
+
+function exportTemplateExcel() {
+  if (!TPL_RES.length) return toast('Không có dữ liệu để xuất');
+  const a = [['STT', 'Mã hàng', 'Tên hàng (mô tả chi tiết)', 'Mã HS', 'Xuất xứ', 'Lượng', 'Đơn vị tính', 'Lượng 2', 'Đơn vị tính 2', 'Đơn giá hóa đơn', 'Trị giá hóa đơn', 'Trị giá tính thuế', 'TS XK(%)', 'Tiền thuế XK', 'Đơn giá tính thuế']];
+  TPL_RES.forEach((r, i) => {
+    let finalQ2 = r.q2;
+    let finalU2 = r.u2;
+    if ((finalQ2 === '' || finalQ2 == null || finalQ2 === 0) && (!finalU2 || isSameUnit(r.u, finalU2))) {
+      finalQ2 = r.q;
+      finalU2 = finalU2 || r.u;
+    }
+    const q1 = Number(r.q) || 0;
+    const g = Number(r.g) || 0;
+    const v = q1 * g;
+    const x = r.hsMatch ? Number(r.hsMatch.x) || 0 : 0;
+    const t = v * x / 100;
+    a.push([i + 1, r.m, r.t, r.hs, r.o, q1, r.u, finalQ2 === '' ? q1 : finalQ2, finalU2 || r.u, g, v, v, x, t, g]);
+  });
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(a), 'Bang_ke_ECUS');
+  XLSX.writeFile(wb, `Bang-ke-ECUS-${new Date().toISOString().slice(0, 10)}.xlsx`);
+  toast(`✓ Đã xuất Excel chuẩn ECUS (${TPL_RES.length} dòng)`);
+}
+
+function copyTemplateResult() {
+  if (!TPL_RES.length) return toast('Không có dữ liệu để copy');
+  const clean = v => String(v ?? '').replace(/[\t\r\n]+/g, ' ').trim();
+  const headers = ['STT', 'Mã hàng', 'Tên hàng (mô tả chi tiết)', 'Mã HS', 'Xuất xứ', 'Lượng', 'Đơn vị tính', 'Lượng 2', 'Đơn vị tính 2', 'Đơn giá', 'Trị giá'];
+  const lines = [headers.join('\t')];
+  TPL_RES.forEach((r, i) => {
+    let finalQ2 = r.q2;
+    let finalU2 = r.u2;
+    if ((finalQ2 === '' || finalQ2 == null || finalQ2 === 0) && (!finalU2 || isSameUnit(r.u, finalU2))) {
+      finalQ2 = r.q;
+      finalU2 = finalU2 || r.u;
+    }
+    const q1 = Number(r.q) || 0;
+    const g = Number(r.g) || 0;
+    const v = q1 * g;
+    lines.push([i + 1, r.m, r.t, r.hs, r.o, q1, r.u, finalQ2 === '' ? q1 : finalQ2, finalU2 || r.u, g, v].map(clean).join('\t'));
+  });
+  copyText(lines.join('\n'), `✓ Đã copy ${TPL_RES.length} dòng chuẩn hóa — Ctrl+V thẳng sang Excel!`);
+}
+
 
 /* ================= HOT-UPDATE TỪ XA QUA GITHUB ================= */
 const isElectron = typeof window !== 'undefined' && typeof window.require === 'function';
