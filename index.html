@@ -378,15 +378,72 @@ mark{background:#fde047;border-radius:2px;padding:0 1px;color:#0f172a;font-weigh
 .bl-note.ok{color:var(--ok)}
 .bl-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
 /* Khung Mau Bang Ke Modal */
-.tpl-guide{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:9px 12px;margin-bottom:10px}
-.tpl-guide-title{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:13px;color:#166534}
+#pm.tpl-mode{padding:1.5vh 1.5vw}
+.mc.tpl-full{width:min(1520px,97vw);height:95vh;max-height:95vh;padding:16px 20px;display:flex;flex-direction:column}
+.mc.tpl-full h3{font-size:17px;margin:0 0 10px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.mc.tpl-full #mb{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.mc.tpl-full .mf{margin-top:10px;flex-shrink:0}
+.tpl-steps{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-shrink:0;flex-wrap:wrap}
+.tpl-step-btn{
+  background:#f1f5f9;border:1px solid var(--bd2);color:var(--tx2);padding:7px 14px;border-radius:8px;
+  font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .15s
+}
+.tpl-step-btn:hover{border-color:var(--pri);color:var(--pri);background:#eff6ff}
+.tpl-step-btn.on{background:var(--pri);border-color:var(--pri);color:#fff;box-shadow:0 2px 6px rgba(37,99,235,.25)}
+.tpl-pane{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px}
+.tpl-guide{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;flex-shrink:0}
+.tpl-guide-title{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13.5px;color:#166534;flex-wrap:wrap}
 .tpl-cols-bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.tpl-col-badge{font-size:11.5px;padding:2px 8px;background:#fff;border:1px solid #86efac;border-radius:4px;color:#15803d;font-weight:600;font-family:var(--mono)}
+.tpl-col-badge{
+  font-size:12.5px;padding:5px 10px;background:#fff;border:1px solid #86efac;border-radius:6px;
+  color:#15803d;font-weight:600;font-family:var(--mono);cursor:pointer;transition:all .12s;user-select:none
+}
+.tpl-col-badge:hover{background:#dcfce7;border-color:#16a34a;transform:translateY(-1px)}
+.tpl-col-badge.active{background:#15803d;color:#fff;border-color:#14532d;box-shadow:0 2px 5px rgba(21,128,61,.25)}
 .tpl-col-badge.req{background:#dcfce7;border-color:#22c55e;color:#14532d;font-weight:700}
-.tpl-top{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
-.tpl-top textarea{min-height:120px;max-height:220px;font-family:var(--mono);font-size:12px;line-height:1.45;resize:vertical}
-.tpl-ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px;background:var(--surf2);border:1px solid var(--bd);border-radius:8px}
-.tpl-opts{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-left:auto}
+.tpl-col-badge.req.active{background:#15803d;color:#fff}
+.tpl-excel-wrap{
+  flex:1;min-height:220px;border:1px solid #cbd5e1;border-radius:8px;overflow:auto;background:#fff;
+  box-shadow:inset 0 1px 2px rgba(15,23,42,.04)
+}
+.tpl-excel-tbl{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px}
+.tpl-excel-tbl thead th{
+  position:sticky;top:0;z-index:3;background:#f1f5f9;color:#1e293b;font-weight:700;
+  border-bottom:2px solid #cbd5e1;border-right:1px solid #cbd5e1;padding:8px 6px;
+  text-align:left;cursor:pointer;user-select:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:background .12s
+}
+.tpl-excel-tbl thead th:hover{background:#e2e8f0}
+.tpl-excel-tbl thead th.col-hl{background:#dbeafe;color:#1d4ed8;border-bottom-color:#2563eb}
+.tpl-excel-tbl thead th.row-num-th{width:42px;text-align:center;cursor:default;background:#e2e8f0;color:#475569}
+.tpl-excel-tbl thead th.row-act-th{width:36px;text-align:center;cursor:default;background:#e2e8f0}
+.tpl-excel-tbl tbody td{
+  border-bottom:1px solid #e2e8f0;border-right:1px solid #e2e8f0;padding:0;height:34px;vertical-align:middle
+}
+.tpl-excel-tbl tbody td.row-num{
+  text-align:center;font-family:var(--mono);font-size:12px;color:#64748b;background:#f8fafc;
+  font-weight:600;user-select:none
+}
+.tpl-excel-tbl tbody td.row-del{text-align:center;background:#f8fafc}
+.tpl-excel-tbl tbody td.row-del button{
+  background:transparent;border:none;color:#94a3b8;cursor:pointer;font-size:13px;padding:4px 6px;border-radius:4px
+}
+.tpl-excel-tbl tbody td.row-del button:hover{color:#dc2626;background:#fee2e2}
+.tpl-cell{
+  width:100%;height:100%;border:none;outline:none;padding:6px 8px;font-size:13px;
+  font-family:inherit;background:transparent;color:#0f172a;border-radius:0
+}
+.tpl-cell:focus{background:#eff6ff;box-shadow:inset 0 0 0 2px #2563eb}
+.tpl-cell.num{text-align:right;font-family:var(--mono)}
+.tpl-cell.code{font-family:var(--mono);font-weight:600}
+.tpl-cell.center{text-align:center;text-transform:uppercase;font-family:var(--mono);font-weight:600}
+.tpl-cell.col-hl{background:#f8fafc}
+.tpl-ctrl{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 12px;
+  background:var(--surf2);border:1px solid var(--bd);border-radius:8px;flex-shrink:0
+}
+.tpl-opts{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-left:auto}
+.mc.tpl-full .bl-wrap{flex:1;min-height:0;max-height:none}
 .badge-sync{display:inline-block;padding:1px 6px;background:#dcfce7;color:#15803d;border:1px solid #86efac;border-radius:4px;font-size:10.5px;font-weight:700;margin-left:4px}
 .badge-ver{display:inline-block;padding:1px 6px;background:#d1fae5;color:#047857;border:1px solid #6ee7b7;border-radius:4px;font-size:11px;font-weight:700}
 </style>
@@ -2312,6 +2369,46 @@ function parseNum(val) {
 /* ================= KHUNG MẪU NẠP BẢNG KÊ / INVOICE VÀO ECUS ================= */
 let TPL_RES = [];
 let TPL_TAB = 'all';
+let TPL_STEP = 'input';
+let TPL_ACTIVE_COL = -1;
+const TPL_COLS = [
+  { key: 'm',  label: '1. Mã hàng',      width: '130px', cls: 'code',   ph: 'VD: A001-PET' },
+  { key: 't',  label: '2. Tên hàng *',   width: 'auto',  cls: '',       ph: 'Mô tả chi tiết hàng hóa (bắt buộc)...', req: true },
+  { key: 'q',  label: '3. Số lượng 1',   width: '100px', cls: 'num',    ph: '0' },
+  { key: 'u',  label: '4. ĐVT 1',        width: '95px',  cls: 'center', ph: 'PCE' },
+  { key: 'q2', label: '5. Lượng 2 / NW', width: '120px', cls: 'num',    ph: '0' },
+  { key: 'u2', label: '6. ĐVT 2',        width: '95px',  cls: 'center', ph: 'KGM' },
+  { key: 'g',  label: '7. Đơn giá',      width: '105px', cls: 'num',    ph: '0.00' },
+  { key: 'o',  label: '8. Xuất xứ',      width: '85px',  cls: 'center', ph: 'CN' }
+];
+let TPL_GRID_ROWS = Array.from({ length: 12 }, () => ['', '', '', '', '', '', '', '']);
+
+function saveExcelBlob(wb, filename) {
+  try {
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 1000);
+    return true;
+  } catch (err) {
+    console.error('saveExcelBlob error:', err);
+    try {
+      XLSX.writeFile(wb, filename);
+      return true;
+    } catch (e2) {
+      alert('Không thể tải file Excel: ' + e2.message);
+      return false;
+    }
+  }
+}
 
 function downloadTemplateExcel() {
   const headers = ['Mã hàng (Part No)', 'Tên hàng (mô tả chi tiết) *', 'Số lượng 1', 'Đơn vị tính 1', 'Lượng 2 (hoặc Net Weight)', 'Đơn vị tính 2', 'Đơn giá hóa đơn', 'Xuất xứ'];
@@ -2329,141 +2426,340 @@ function downloadTemplateExcel() {
     { wch: 22 }, { wch: 15 }, { wch: 16 }, { wch: 12 }
   ];
   XLSX.utils.book_append_sheet(wb, ws, 'Khung_mau_Bang_ke');
-  XLSX.writeFile(wb, 'Mau_Bang_Ke_Hoa_Don_ECUS.xlsx');
-  toast('✓ Đã tải file mẫu Mau_Bang_Ke_Hoa_Don_ECUS.xlsx');
+  if (saveExcelBlob(wb, 'Mau_Bang_Ke_Hoa_Don_ECUS.xlsx')) {
+    toast('✓ Đã tải file mẫu Mau_Bang_Ke_Hoa_Don_ECUS.xlsx');
+  }
+}
+
+function closeTemplateModal() {
+  const pm = $('pm');
+  const mc = pm.querySelector('.mc');
+  pm.classList.remove('tpl-mode');
+  mc.classList.remove('wide', 'tpl-full');
+  pm.style.display = 'none';
+}
+
+function switchTemplateStep(step) {
+  TPL_STEP = step;
+  const pIn = $('tplPaneInput');
+  const pRes = $('tplPaneResult');
+  const bIn = $('tplStepInputBtn');
+  const bRes = $('tplStepResultBtn');
+  if (!pIn || !pRes) return;
+  if (step === 'result') {
+    pIn.style.display = 'none';
+    pRes.style.display = 'flex';
+    bIn.classList.remove('on');
+    bRes.classList.add('on');
+  } else {
+    pIn.style.display = 'flex';
+    pRes.style.display = 'none';
+    bIn.classList.add('on');
+    bRes.classList.remove('on');
+  }
+}
+
+function focusTemplateCol(colIdx) {
+  TPL_ACTIVE_COL = colIdx;
+  if (TPL_STEP !== 'input') switchTemplateStep('input');
+  renderTemplateGrid();
+  let targetRow = TPL_GRID_ROWS.findIndex(r => !String(r[colIdx] || '').trim());
+  if (targetRow === -1) targetRow = 0;
+  setTimeout(() => {
+    const inp = document.querySelector(`.tpl-cell[data-r="${targetRow}"][data-c="${colIdx}"]`);
+    if (inp) {
+      inp.focus();
+      inp.select();
+    }
+  }, 20);
+  toast(`Đã chọn cột ${TPL_COLS[colIdx].label} — Gõ hoặc Ctrl+V để dán dữ liệu`);
+}
+
+function renderTemplateGrid() {
+  const thead = $('tplExcelHead');
+  const tbody = $('tplExcelBody');
+  const bar = $('tplColsBar');
+  if (!thead || !tbody) return;
+
+  if (bar) {
+    bar.innerHTML = TPL_COLS.map((c, idx) =>
+      `<button type="button" class="tpl-col-badge${c.req ? ' req' : ''}${TPL_ACTIVE_COL === idx ? ' active' : ''}" onclick="focusTemplateCol(${idx})" title="Bấm để chọn & nhập vào cột ${esc(c.label)}">${esc(c.label)}</button>`
+    ).join('');
+  }
+
+  thead.innerHTML = `<tr>
+    <th class="row-num-th">#</th>
+    ${TPL_COLS.map((c, idx) =>
+      `<th style="${c.width !== 'auto' ? `width:${c.width}` : 'min-width:260px'}" class="${TPL_ACTIVE_COL === idx ? 'col-hl' : ''}" onclick="focusTemplateCol(${idx})" title="Bấm để chọn cột ${esc(c.label)}">${esc(c.label)}</th>`
+    ).join('')}
+    <th class="row-act-th" title="Xóa dòng"></th>
+  </tr>`;
+
+  tbody.innerHTML = TPL_GRID_ROWS.map((row, r) => `
+    <tr>
+      <td class="row-num">${r + 1}</td>
+      ${TPL_COLS.map((c, colIdx) => `
+        <td>
+          <input type="text" class="tpl-cell ${c.cls}${TPL_ACTIVE_COL === colIdx ? ' col-hl' : ''}"
+            data-r="${r}" data-c="${colIdx}"
+            value="${esc(row[colIdx] ?? '')}"
+            placeholder="${r === 0 ? esc(c.ph) : ''}"
+            oninput="TPL_GRID_ROWS[${r}][${colIdx}]=this.value"
+            onfocus="TPL_ACTIVE_COL=${colIdx}"
+            onkeydown="handleTemplateKeyDown(event, ${r}, ${colIdx})"
+            onpaste="handleTemplatePaste(event, ${r}, ${colIdx})">
+        </td>
+      `).join('')}
+      <td class="row-del"><button type="button" onclick="deleteTemplateRow(${r})" title="Xóa dòng ${r + 1}">✕</button></td>
+    </tr>
+  `).join('');
+
+  const filledCount = TPL_GRID_ROWS.filter(r => r.some(v => String(v || '').trim() !== '')).length;
+  if ($('tplRowCount')) $('tplRowCount').textContent = `${filledCount} dòng có dữ liệu / ${TPL_GRID_ROWS.length} dòng`;
+}
+
+function addTemplateRows(count = 5) {
+  for (let i = 0; i < count; i++) TPL_GRID_ROWS.push(['', '', '', '', '', '', '', '']);
+  renderTemplateGrid();
+}
+
+function deleteTemplateRow(r) {
+  if (TPL_GRID_ROWS.length <= 1) {
+    TPL_GRID_ROWS[0] = ['', '', '', '', '', '', '', ''];
+  } else {
+    TPL_GRID_ROWS.splice(r, 1);
+  }
+  renderTemplateGrid();
+}
+
+function loadSampleToGrid() {
+  TPL_GRID_ROWS = [
+    ['A001-PET', 'Tem bằng nhựa PET trắng mờ có in, kt: 93.66x18.3mm, mới 100%', '1000', 'PCE', '1000', 'PCE', '0.15', 'CN'],
+    ['B002-OIL', 'Dầu bôi trơn công nghiệp gốc khoáng, đóng phuy 200L', '5', 'phuy', '900', 'KGM', '450', 'JP'],
+    ['C003-VAL', 'Bộ van điều áp khí nén chuyên dụng', '20', 'SET', '', 'SET', '12.5', 'KR'],
+    ['D004-STE', 'Tấm thép không gỉ cán nguội 1.2mm x 1200mm x 2400mm', '50', 'TAM', '1250', 'KGM', '45.0', 'VN'],
+    ['', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '']
+  ];
+  renderTemplateGrid();
+  toast('✓ Đã điền 4 dòng dữ liệu mẫu vào bảng Excel');
+}
+
+function isTplHeaderRow(cols) {
+  const isHeader = str => {
+    const s = cleanUnitStr(str);
+    return /mahang|partno|itemcode|tenhang|description|mota|soluong|soluong1|qty|quantity|dvt|dvt1|uom|unit|luong2|soluong2|netweight|nw|dongia|unitprice|price|xuatxu|origin|coo/.test(s);
+  };
+  return cols.some(isHeader);
+}
+
+function handleTemplateKeyDown(e, r, c) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    if (r + 1 >= TPL_GRID_ROWS.length) {
+      TPL_GRID_ROWS.push(['', '', '', '', '', '', '', '']);
+      renderTemplateGrid();
+    }
+    const next = document.querySelector(`.tpl-cell[data-r="${r + 1}"][data-c="${c}"]`);
+    if (next) { next.focus(); next.select(); }
+  } else if (e.key === 'ArrowDown') {
+    if (r + 1 < TPL_GRID_ROWS.length) {
+      e.preventDefault();
+      const next = document.querySelector(`.tpl-cell[data-r="${r + 1}"][data-c="${c}"]`);
+      if (next) next.focus();
+    }
+  } else if (e.key === 'ArrowUp') {
+    if (r > 0) {
+      e.preventDefault();
+      const prev = document.querySelector(`.tpl-cell[data-r="${r - 1}"][data-c="${c}"]`);
+      if (prev) prev.focus();
+    }
+  }
+}
+
+function handleTemplatePaste(e, startRow, startCol) {
+  const text = (e.clipboardData || window.clipboardData).getData('text');
+  if (!text) return;
+  if (!text.includes('\t') && !text.includes('\n')) return; // single cell normal paste
+
+  e.preventDefault();
+  let lines = text.split(/\r?\n/).filter(l => l.trim() !== '');
+  if (!lines.length) return;
+
+  const firstCols = lines[0].split('\t').map(s => s.replace(/^["']|["']$/g, '').trim());
+  const gridEmpty = TPL_GRID_ROWS.every(r => r.every(v => !String(v || '').trim()));
+  if (startRow === 0 && gridEmpty && isTplHeaderRow(firstCols)) {
+    lines = lines.slice(1);
+  }
+  if (!lines.length) return;
+
+  const neededRows = startRow + lines.length;
+  while (TPL_GRID_ROWS.length < neededRows) {
+    TPL_GRID_ROWS.push(['', '', '', '', '', '', '', '']);
+  }
+
+  let pastedCells = 0;
+  lines.forEach((line, rOff) => {
+    const cols = line.split('\t').map(s => s.replace(/^["']|["']$/g, '').trim());
+    cols.forEach((val, cOff) => {
+      const targetCol = startCol + cOff;
+      if (targetCol < 8) {
+        TPL_GRID_ROWS[startRow + rOff][targetCol] = val;
+        pastedCells++;
+      }
+    });
+  });
+
+  renderTemplateGrid();
+  setTimeout(() => {
+    const inp = document.querySelector(`.tpl-cell[data-r="${startRow}"][data-c="${startCol}"]`);
+    if (inp) inp.focus();
+  }, 20);
+  toast(`✓ Đã dán ${lines.length} dòng (${pastedCells} ô) vào bảng Excel`);
 }
 
 function openTemplateModal() {
-  const mc = $('pm').querySelector('.mc');
-  mc.classList.add('wide');
+  const pm = $('pm');
+  const mc = pm.querySelector('.mc');
+  pm.classList.add('tpl-mode');
+  mc.classList.add('wide', 'tpl-full');
+
+  TPL_STEP = 'input';
+  if (!TPL_GRID_ROWS || !TPL_GRID_ROWS.length) {
+    TPL_GRID_ROWS = Array.from({ length: 12 }, () => ['', '', '', '', '', '', '', '']);
+  }
+
   const body = `
-    <div class="tpl-top">
+    <div class="tpl-steps">
+      <button type="button" id="tplStepInputBtn" class="tpl-step-btn on" onclick="switchTemplateStep('input')">📝 Bước 1: Nhập liệu Bảng Excel (8 cột)</button>
+      <button type="button" id="tplStepResultBtn" class="tpl-step-btn" onclick="switchTemplateStep('result')">🔍 Bước 2: Kết quả Khớp mã HS &amp; Chuẩn hóa ECUS <span id="tplResBadge"></span></button>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <button type="button" class="ok sm" onclick="downloadTemplateExcel()" style="background:linear-gradient(135deg,#059669,#10b981);padding:7px 12px;font-size:12.5px">⬇ Tải file mẫu Excel (.xlsx)</button>
+        <input type="file" id="tplFile" accept=".xlsx,.xls,.csv" hidden>
+        <button type="button" class="g sm" onclick="$('tplFile').click()" style="padding:7px 12px;font-size:12.5px">📂 Chọn file Excel (.xlsx / .xls)</button>
+      </div>
+    </div>
+
+    <div id="tplPaneInput" class="tpl-pane">
       <div class="tpl-guide">
         <div class="tpl-guide-title">
-          <span>💡 <b>Khung 8 cột chuẩn hóa từ Invoice / Packing List vào ECUS:</b></span>
-          <button class="ok sm" onclick="downloadTemplateExcel()" style="margin-left:auto;background:linear-gradient(135deg,#059669,#10b981)">⬇ Tải file mẫu Excel (.xlsx)</button>
+          <span>💡 <b>Bấm vào ô từ 1 → 8 để chọn cột hoặc bấm thẳng vào từng ô Excel bên dưới để gõ / dán (Ctrl+V) từ Excel:</b></span>
+          <span id="tplRowCount" style="margin-left:auto;font-size:12px;font-weight:700;color:#15803d"></span>
         </div>
-        <div class="tpl-cols-bar">
-          <span class="tpl-col-badge">1. Mã hàng</span>
-          <span class="tpl-col-badge req">2. Tên hàng *</span>
-          <span class="tpl-col-badge">3. Số lượng 1</span>
-          <span class="tpl-col-badge">4. ĐVT 1</span>
-          <span class="tpl-col-badge">5. Lượng 2 / NW</span>
-          <span class="tpl-col-badge">6. ĐVT 2</span>
-          <span class="tpl-col-badge">7. Đơn giá</span>
-          <span class="tpl-col-badge">8. Xuất xứ</span>
-        </div>
+        <div class="tpl-cols-bar" id="tplColsBar"></div>
       </div>
-      <textarea id="tplIn" placeholder="Dán (Ctrl+V) các cột từ file Excel Invoice/Packing List của bạn vào đây...&#10;Hệ thống tự động:&#10;1. Nhận diện các cột (kể cả copy thiếu cột hay đảo vị trí Tên hàng - Mã hàng)&#10;2. Chuẩn hóa ĐVT theo bảng mã chuẩn Hải quan VNACCS (DVT.xls)&#10;3. Tự động áp dụng Chiêu 2: Điền Lượng 2 = Lượng 1 khi ĐVT 2 trùng ĐVT 1 (hoặc để trống)&#10;4. Tự động tra cứu mã HS &amp; ưu tiên mã tích xanh 🛡️ đã chốt chuẩn"></textarea>
+
+      <div class="tpl-excel-wrap">
+        <table class="tpl-excel-tbl">
+          <thead id="tplExcelHead"></thead>
+          <tbody id="tplExcelBody"></tbody>
+        </table>
+      </div>
+
       <div class="tpl-ctrl">
-        <button onclick="runTemplateParse()" style="padding:9px 16px;font-size:13.5px;font-weight:700">⚡ Xử lý bảng kê &amp; Khớp mã HS</button>
-        <input type="file" id="tplFile" accept=".xlsx,.xls,.csv" hidden>
-        <button class="g sm" onclick="$('tplFile').click()">📂 Hoặc chọn file Excel (.xlsx / .xls)</button>
+        <button type="button" onclick="runTemplateParse()" style="padding:10px 20px;font-size:14px;font-weight:700">⚡ Xử lý bảng kê &amp; Khớp mã HS</button>
+        <button type="button" class="g sm" onclick="addTemplateRows(5)">➕ Thêm 5 dòng</button>
+        <button type="button" class="soft sm" onclick="loadSampleToGrid()">📋 Điền dữ liệu mẫu</button>
+        <button type="button" class="r-soft sm" onclick="clearTemplateInput()">✕ Xóa bảng</button>
         <div class="tpl-opts">
-          <label class="fl-chk" style="font-size:12px;font-weight:600;color:#047857"><input type="checkbox" id="tplAutoSyncQ2" checked> ⚡ Chiêu 2: Điền Lượng 2 = Lượng 1</label>
-          <label class="fl-chk" style="font-size:12px;color:var(--tx2)"><input type="checkbox" id="tplNormUnit" checked> Chuẩn hóa ĐVT (DVT.xls)</label>
-          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--tx2)">
-            <span>Định dạng ĐVT:</span>
-            <select id="tplUnitFmt" style="font-size:12px;padding:3px 6px">
+          <label class="fl-chk" style="font-size:12.5px;font-weight:600;color:#047857"><input type="checkbox" id="tplAutoSyncQ2" checked> ⚡ Chiêu 2: Điền Lượng 2 = Lượng 1</label>
+          <label class="fl-chk" style="font-size:12.5px;color:var(--tx2)"><input type="checkbox" id="tplNormUnit" checked> Chuẩn hóa ĐVT (DVT.xls)</label>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx2)">
+            <span>ĐVT:</span>
+            <select id="tplUnitFmt" style="font-size:12.5px;padding:4px 8px">
               <option value="code" selected>Mã Hải quan (PCE, KGM, SET...)</option>
               <option value="en">Tiếng Anh VNACCS (PIECES, KILO-GRAMMES...)</option>
               <option value="name">Tiếng Việt (Cái/Chiếc, Kilogam...)</option>
             </select>
           </div>
         </div>
-        <button class="r-soft xs" onclick="clearTemplateInput()">✕ Xóa nháp</button>
       </div>
     </div>
-    <div id="tplStats"></div>
-    <div id="tplOut"></div>
-    <div class="bl-acts" id="tplActs" style="display:none">
-      <button class="ok" onclick="pushTemplateToECUS()">➕ Đẩy toàn bộ vào Danh sách ECUS (Lô: <span id="tplCurLot">${esc(ST.cur)}</span>)</button>
-      <button class="soft" onclick="exportTemplateExcel()">⬇ Xuất file Excel chuẩn ECUS</button>
-      <button class="g" onclick="copyTemplateResult()">📋 Copy bảng (dán sang Excel)</button>
+
+    <div id="tplPaneResult" class="tpl-pane" style="display:none">
+      <div id="tplStats" style="flex-shrink:0"></div>
+      <div id="tplOut" style="flex:1;min-height:0;display:flex;flex-direction:column"></div>
+      <div class="bl-acts" id="tplActs" style="display:none;flex-shrink:0">
+        <button type="button" class="g" onclick="switchTemplateStep('input')">← Quay lại sửa bảng Excel</button>
+        <button type="button" class="ok" onclick="pushTemplateToECUS()">➕ Đẩy toàn bộ vào Danh sách ECUS (Lô: <span id="tplCurLot">${esc(ST.cur)}</span>)</button>
+        <button type="button" class="soft" onclick="exportTemplateExcel()">⬇ Xuất file Excel chuẩn ECUS</button>
+        <button type="button" class="g" onclick="copyTemplateResult()">📋 Copy bảng (dán sang Excel)</button>
+      </div>
     </div>
   `;
-  modal('📥 Nạp bảng kê hóa đơn / Invoice vào ECUS (Khung mẫu)', body, '', () => {});
+  modal('📥 Nạp bảng kê hóa đơn / Invoice vào ECUS (Khung mẫu Excel)', body, '', () => {});
 
-  const closeBtn = $('pm').querySelector('.mf .g');
-  closeBtn.onclick = () => { mc.classList.remove('wide'); $('pm').style.display = 'none'; };
-  $('pm').onclick = e => { if (e.target === $('pm')) { mc.classList.remove('wide'); $('pm').style.display = 'none'; } };
+  const closeBtn = pm.querySelector('.mf .g');
+  closeBtn.onclick = closeTemplateModal;
+  pm.onclick = e => { if (e.target === pm) closeTemplateModal(); };
 
   $('tplFile').onchange = async e => {
     const f = e.target.files[0]; e.target.value = ''; if (!f) return;
     try {
       const wb = await readWb(f);
-      const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: '', raw: false });
+      let rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: '', raw: false });
+      rows = rows.filter(r => r.some(c => String(c || '').trim() !== ''));
       if (!rows.length) return alert('File Excel không có dữ liệu');
-      const lines = rows.map(r => r.join('\t').replace(/[\r\n]+/g, ' '));
-      $('tplIn').value = lines.join('\n');
-      runTemplateParse();
+      if (isTplHeaderRow(rows[0].map(c => String(c || '').trim()))) {
+        rows = rows.slice(1);
+      }
+      if (!rows.length) return alert('File Excel chỉ có dòng tiêu đề, chưa có dữ liệu hàng hóa');
+      TPL_GRID_ROWS = rows.map(r => {
+        const arr = ['', '', '', '', '', '', '', ''];
+        for (let k = 0; k < 8; k++) arr[k] = String(r[k] ?? '').replace(/[\r\n]+/g, ' ').trim();
+        return arr;
+      });
+      while (TPL_GRID_ROWS.length < 8) TPL_GRID_ROWS.push(['', '', '', '', '', '', '', '']);
+      switchTemplateStep('input');
+      renderTemplateGrid();
+      toast(`✓ Đã nạp ${rows.length} dòng từ file Excel vào bảng — Kiểm tra rồi bấm "Xử lý bảng kê"`);
     } catch (x) { alert('Lỗi đọc file: ' + x.message); }
   };
 
-  setTimeout(() => $('tplIn').focus(), 50);
+  renderTemplateGrid();
+  setTimeout(() => {
+    const firstCell = document.querySelector('.tpl-cell[data-r="0"][data-c="1"]');
+    if (firstCell) firstCell.focus();
+  }, 60);
 }
 
 function clearTemplateInput() {
-  $('tplIn').value = '';
+  TPL_GRID_ROWS = Array.from({ length: 12 }, () => ['', '', '', '', '', '', '', '']);
   TPL_RES = [];
-  $('tplStats').innerHTML = '';
-  $('tplOut').innerHTML = '';
-  $('tplActs').style.display = 'none';
+  TPL_ACTIVE_COL = -1;
+  if ($('tplStats')) $('tplStats').innerHTML = '';
+  if ($('tplOut')) $('tplOut').innerHTML = '';
+  if ($('tplActs')) $('tplActs').style.display = 'none';
+  if ($('tplResBadge')) $('tplResBadge').textContent = '';
+  renderTemplateGrid();
+  toast('Đã xóa sạch dữ liệu trong bảng');
 }
 
-function parseTemplateText(rawText, opts = {}) {
-  const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-  if (!lines.length) return [];
-
-  const isHeader = str => {
-    const s = cleanUnitStr(str);
-    return /mahang|partno|itemcode|tenhang|description|mota|soluong|soluong1|qty|quantity|dvt|dvt1|uom|unit|luong2|soluong2|netweight|nw|dongia|unitprice|price|xuatxu|origin|coo/.test(s);
-  };
-
-  let startIndex = 0;
-  const firstRowCols = lines[0].split('\t').map(c => c.trim());
-  if (firstRowCols.some(isHeader)) {
-    startIndex = 1;
-  }
-
+function parseTemplateRows(gridRows, opts = {}) {
   const parsed = [];
-  for (let i = startIndex; i < lines.length; i++) {
-    const line = lines[i];
-    if (!line) continue;
-    const cols = line.split('\t').map(c => c.replace(/^["']|["']$/g, '').trim());
+  for (let i = 0; i < gridRows.length; i++) {
+    const rawCols = gridRows[i].map(v => String(v ?? '').trim());
+    if (rawCols.every(v => !v)) continue;
 
-    let m = '', t = '', q = 1, u = '', q2 = '', u2 = '', g = 0, o = '';
+    let m = rawCols[0];
+    let t = rawCols[1];
+    let q = rawCols[2] !== '' ? (parseNum(rawCols[2]) || 1) : 1;
+    let u = rawCols[3];
+    let q2 = rawCols[4] !== '' ? parseNum(rawCols[4]) : '';
+    let u2 = rawCols[5];
+    let g = rawCols[6] !== '' ? parseNum(rawCols[6]) : 0;
+    let o = rawCols[7].toUpperCase();
 
-    if (cols.length >= 8) {
-      m = cols[0]; t = cols[1]; q = parseNum(cols[2]) || 1; u = cols[3];
-      q2 = cols[4] !== '' ? parseNum(cols[4]) : ''; u2 = cols[5]; g = parseNum(cols[6]); o = cols[7];
-    } else if (cols.length === 7) {
-      m = cols[0]; t = cols[1]; q = parseNum(cols[2]) || 1; u = cols[3];
-      q2 = cols[4] !== '' ? parseNum(cols[4]) : ''; u2 = cols[5]; g = parseNum(cols[6]);
-    } else if (cols.length === 6) {
-      m = cols[0]; t = cols[1]; q = parseNum(cols[2]) || 1; u = cols[3];
-      if (/^[A-Za-z]{2}$/.test(cols[5])) {
-        g = parseNum(cols[4]); o = cols[5].toUpperCase();
-      } else {
-        q2 = cols[4] !== '' ? parseNum(cols[4]) : ''; u2 = cols[5];
-      }
-    } else if (cols.length === 5) {
-      m = cols[0]; t = cols[1]; q = parseNum(cols[2]) || 1; u = cols[3]; g = parseNum(cols[4]);
-    } else if (cols.length === 4) {
-      if (cleanUnitStr(cols[3]) && (getUnitInfo(cols[3]) || isNaN(cols[3]))) {
-        m = cols[0]; t = cols[1]; q = parseNum(cols[2]) || 1; u = cols[3];
-      } else {
-        t = cols[0]; q = parseNum(cols[1]) || 1; u = cols[2]; g = parseNum(cols[3]);
-      }
-    } else if (cols.length === 3) {
-      t = cols[0]; q = parseNum(cols[1]) || 1; u = cols[2];
-    } else if (cols.length === 2) {
-      t = cols[0]; q = parseNum(cols[1]) || 1;
-    } else {
-      t = cols[0];
+    // Nếu người dùng nhập/dán tên hàng vào cột 1 mà để trống cột 2
+    if (!t && m) {
+      t = m;
+      m = '';
     }
+    if (!t) continue;
 
-    if (m && t && m.length > 30 && t.length <= 20 && !m.includes('\t') && /^[A-Za-z0-9\-_./]+$/.test(t)) {
+    if (m && t && m.length > 30 && t.length <= 20 && /^[A-Za-z0-9\-_./]+$/.test(t)) {
       const temp = m; m = t; t = temp;
     }
 
@@ -2495,7 +2791,7 @@ function parseTemplateText(rawText, opts = {}) {
     }
 
     parsed.push({
-      idx: i + 1,
+      idx: parsed.length + 1,
       m, t, hs: matchedHs,
       hsMatch,
       q, u, q2, u2, g, o,
@@ -2504,30 +2800,31 @@ function parseTemplateText(rawText, opts = {}) {
       totalVal: q * g
     });
   }
-
   return parsed;
 }
 
 function runTemplateParse() {
-  const raw = $('tplIn').value;
-  if (!raw.trim()) return toast('Hãy dán dữ liệu bảng kê từ Excel vào ô nhập');
+  const hasData = TPL_GRID_ROWS.some(r => r.some(v => String(v || '').trim() !== ''));
+  if (!hasData) return toast('Hãy nhập hoặc dán dữ liệu vào bảng Excel trước');
   const autoSyncQ2 = $('tplAutoSyncQ2') ? $('tplAutoSyncQ2').checked : true;
   const doNormUnit = $('tplNormUnit') ? $('tplNormUnit').checked : true;
   const unitFmt = $('tplUnitFmt') ? $('tplUnitFmt').value : 'code';
 
   const t0 = performance.now();
-  TPL_RES = parseTemplateText(raw, { autoSyncQ2, normUnit: doNormUnit, unitFormat: unitFmt });
+  TPL_RES = parseTemplateRows(TPL_GRID_ROWS, { autoSyncQ2, normUnit: doNormUnit, unitFormat: unitFmt });
   const ms = Math.round(performance.now() - t0);
   TPL_TAB = 'all';
+  if ($('tplResBadge')) $('tplResBadge').textContent = TPL_RES.length ? `(${TPL_RES.length})` : '';
   renderTemplatePreview();
+  switchTemplateStep('result');
   toast(`✓ Đã nạp và xử lý ${TPL_RES.length} dòng hàng (${ms}ms)!`);
 }
 
 function renderTemplatePreview() {
   if (!TPL_RES.length) {
     $('tplStats').innerHTML = '';
-    $('tplOut').innerHTML = '<div class="m" style="padding:20px">Chưa có dòng dữ liệu nào được nhận diện.</div>';
-    $('tplActs').style.display = 'none';
+    $('tplOut').innerHTML = '<div class="m" style="padding:20px">Chưa có dòng dữ liệu nào được nhận diện. Hãy kiểm tra lại cột Tên hàng (*).</div>';
+    $('tplActs').style.display = 'flex';
     return;
   }
 
@@ -2555,7 +2852,7 @@ function renderTemplatePreview() {
         ${cBad?`<span class="bl-tab${TPL_TAB==='bad'?' on':''}" onclick="TPL_TAB='bad';renderTemplatePreview()">🔴 Hết HL (${cBad})</span>`:''}
         <span class="bl-tab${TPL_TAB==='empty'?' on':''}" onclick="TPL_TAB='empty';renderTemplatePreview()">⚪ Hàng mới (${cEmpty})</span>
       </div>
-      <div style="font-size:12px;color:var(--tx2);display:flex;gap:12px;align-items:center">
+      <div style="font-size:12.5px;color:var(--tx2);display:flex;gap:14px;align-items:center">
         <span style="color:#047857;font-weight:600">⚡ Đồng bộ Lượng 2: <b>${cSync}/${cAll}</b> dòng</span>
         <span>Tổng SL: <b>${fm(totQ)}</b></span>
         <span>Trị giá: <b style="color:var(--ok)">${fm(totVal)}</b></span>
@@ -2575,16 +2872,16 @@ function renderTemplatePreview() {
   $('tplOut').innerHTML = `
     <div class="bl-wrap"><table class="bl-tbl">
       <thead><tr>
-        <th style="width:36px">#</th>
-        <th style="width:110px">Mã hàng</th>
+        <th style="width:38px">#</th>
+        <th style="width:120px">Mã hàng</th>
         <th>Tên hàng (mô tả chi tiết)</th>
-        <th style="width:125px">Mã HS</th>
-        <th style="width:65px">SL 1</th>
-        <th style="width:68px">ĐVT 1</th>
-        <th style="width:105px">Lượng 2 (NW)</th>
-        <th style="width:68px">ĐVT 2</th>
-        <th style="width:75px">Đơn giá</th>
-        <th style="width:85px">Trị giá</th>
+        <th style="width:130px">Mã HS</th>
+        <th style="width:70px">SL 1</th>
+        <th style="width:70px">ĐVT 1</th>
+        <th style="width:110px">Lượng 2 (NW)</th>
+        <th style="width:70px">ĐVT 2</th>
+        <th style="width:80px">Đơn giá</th>
+        <th style="width:90px">Trị giá</th>
         <th style="width:55px">XX</th>
         <th>Trạng thái tra cứu HS</th>
       </tr></thead>
@@ -2661,8 +2958,7 @@ function pushTemplateToECUS() {
   }
   save();
   drawL();
-  $('pm').querySelector('.mc').classList.remove('wide');
-  $('pm').style.display = 'none';
+  closeTemplateModal();
   $('pk').scrollTop = $('pk').scrollHeight;
   toast(`✓ Đã nạp thành công ${count} dòng vào Danh sách ECUS (Lô: ${ST.cur})!`);
 }
@@ -2686,8 +2982,9 @@ function exportTemplateExcel() {
   });
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(a), 'Bang_ke_ECUS');
-  XLSX.writeFile(wb, `Bang-ke-ECUS-${new Date().toISOString().slice(0, 10)}.xlsx`);
-  toast(`✓ Đã xuất Excel chuẩn ECUS (${TPL_RES.length} dòng)`);
+  if (saveExcelBlob(wb, `Bang-ke-ECUS-${new Date().toISOString().slice(0, 10)}.xlsx`)) {
+    toast(`✓ Đã xuất Excel chuẩn ECUS (${TPL_RES.length} dòng)`);
+  }
 }
 
 function copyTemplateResult() {
